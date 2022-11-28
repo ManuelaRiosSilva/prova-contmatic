@@ -1,16 +1,49 @@
 package br.com.contmatic.prova.empresa;
 
+import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MAXIMA_MENSAGEM;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.util.validacao.DataUtil.validarDataMaxima;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEspaco;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaNula;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaTamanhoMaximo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaVazia;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNulo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMaximo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMinimo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarVazio;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.endereco.Endereco;
 import br.com.contmatic.prova.telefone.Telefone;
 import br.com.contmatic.prova.util.validacao.CNPJUtil;
-import br.com.contmatic.prova.util.validacao.ValidacaoUtil;
 
-public class Empresa {
+public class Empresa extends Auditoria {
 
 	private String cnpj;
 
@@ -25,22 +58,7 @@ public class Empresa {
 	private LocalDate dataAbertura;
 
 	public Empresa(String cnpj) {
-		super();
 		this.setCnpj(cnpj);
-	}
-
-	public void addTelefone(Telefone telefone) {
-		if (telefones == null) {
-			telefones = new ArrayList<>();
-		}
-		telefones.add(telefone);
-	}
-
-	public void addEndereco(Endereco endereco) {
-		if (enderecos == null) {
-			enderecos = new ArrayList<>();
-		}
-		enderecos.add(endereco);
 	}
 
 	public String getCnpj() {
@@ -57,15 +75,12 @@ public class Empresa {
 	}
 
 	public void setNomeFantasia(String nomeFantasia) {
-		ValidacaoUtil.validarNulo(nomeFantasia, "O campo Nome da Empresa é obrigatório.");
-		ValidacaoUtil.validarVazio(nomeFantasia, "O campo Nome da Empresa não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(nomeFantasia, "O campo Nome da Empresa precisa ser válido.");
-		if (nomeFantasia.length() >= 5 && nomeFantasia.length() <= 35) {
-			ValidacaoUtil.validarCaractereEspecial(nomeFantasia, "O campo Nome da Empresa só pode conter letras.");
-			this.nomeFantasia = nomeFantasia;
-		} else {
-			throw new IllegalArgumentException("O campo Nome da Empresa deve conter de 5 a 35 caracteres.");
-		}
+		validarNulo(nomeFantasia, NOME_FANTASIA_MENSAGEM_NULO);
+		validarVazio(nomeFantasia, NOME_FANTASIA_MENSAGEM_VAZIO);
+		validarEspaco(nomeFantasia, NOME_FANTASIA_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(nomeFantasia, NOME_FANTASIA_TAMANHO_MINIMO, NOME_FANTASIA_MENSAGEM_TAMANHO_MINIMO);
+		validarTamanhoMaximo(nomeFantasia, NOME_FANTASIA_TAMANHO_MAXIMO, NOME_FANTASIA_MENSAGEM_TAMANHO_MAXIMO);
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getRazaoSocial() {
@@ -73,14 +88,12 @@ public class Empresa {
 	}
 
 	public void setRazaoSocial(String razaoSocial) {
-		ValidacaoUtil.validarNulo(razaoSocial, "O campo Razão Social da Empresa é obrigatório.");
-		ValidacaoUtil.validarVazio(razaoSocial, "O campo Razão Social da Empresa não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(razaoSocial, "O campo Razão Social da Empresa precisa ser válido.");
-		if (razaoSocial.length() >= 5 && razaoSocial.length() <= 50) {
-			this.razaoSocial = razaoSocial;
-		} else {
-			throw new IllegalArgumentException("O campo Razão Social da Empresa deve conter de 5 a 50 caracteres.");
-		}
+		validarNulo(razaoSocial, RAZAO_SOCIAL_MENSAGEM_NULO);
+		validarVazio(razaoSocial, RAZAO_SOCIAL_MENSAGEM_VAZIO);
+		validarEspaco(razaoSocial, RAZAO_SOCIAL_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(razaoSocial, RAZAO_SOCIAL_TAMANHO_MINIMO, RAZAO_SOCIAL_MENSAGEM_TAMANHO_MINIMO);
+		validarTamanhoMaximo(razaoSocial, RAZAO_SOCIAL_TAMANHO_MAXIMO, RAZAO_SOCIAL_MENSAGEM_TAMANHO_MAXIMO);
+		this.razaoSocial = razaoSocial;
 	}
 
 	public List<Telefone> getTelefones() {
@@ -88,11 +101,10 @@ public class Empresa {
 	}
 
 	public void setTelefones(List<Telefone> telefones) {
-		if (!telefones.isEmpty() && telefones.size() <= 5) {
-			this.telefones = telefones;
-		} else {
-			throw new IllegalArgumentException("É preciso ter pelo menos 1 telefone cadastrado e não é possível adicionar mais que 5 telefones.");
-		}
+		validarListaNula(telefones, LISTA_TELEFONES_MENSAGEM_NULO);
+		validarListaVazia(telefones,LISTA_TELEFONES_MENSAGEM_VAZIO);
+		validarListaTamanhoMaximo(telefones, LISTA_TELEFONES_TAMANHO_MAXIMO, LISTA_TELEFONES_MENSAGEM_TAMANHO_MAXIMO);
+		this.telefones = telefones;
 	}
 
 	public List<Endereco> getEnderecos() {
@@ -100,6 +112,9 @@ public class Empresa {
 	}
 
 	public void setEnderecos(List<Endereco> enderecos) {
+		validarListaNula(enderecos, LISTA_ENDERECOS_MENSAGEM_NULO);
+		validarListaVazia(enderecos, LISTA_ENDERECOS_MENSAGEM_VAZIO);
+		validarListaTamanhoMaximo(enderecos, LISTA_ENDERECOS_TAMANHO_MAXIMO, LISTA_ENDERECOS_MENSAGEM_TAMANHO_MAXIMO);
 		this.enderecos = enderecos;
 	}
 
@@ -108,6 +123,8 @@ public class Empresa {
 	}
 
 	public void setDataAbertura(LocalDate dataAbertura) {
+		validarNulo(dataAbertura, DATA_ABERTURA_MENSAGEM_NULO);
+		validarDataMaxima(dataAbertura, DATA_ABERTURA_MAXIMA_MENSAGEM);
 		this.dataAbertura = dataAbertura;
 	}
 
@@ -124,11 +141,30 @@ public class Empresa {
 		if (obj == null) {
 			return false;
 		}
-		if (getClass() != obj.getClass()) {
-			return false;
+	 	if (getClass() != obj.getClass()) {
+ 			return false;
 		}
 		Empresa other = (Empresa) obj;
 		return Objects.equals(cnpj, other.cnpj);
 	}
 
+	@Override
+	public String toString() {
+		return new StringBuilder()
+		.append("Empresa [cnpj=")
+		.append(cnpj)
+		.append(", nomeFantasia=")
+		.append(nomeFantasia)
+		.append(", razaoSocial=")
+		.append(razaoSocial)
+		.append(", telefones=")
+		.append(telefones)
+		.append(", enderecos=")
+		.append(enderecos)
+		.append(", dataAbertura=")
+		.append(dataAbertura)
+		.append("]\n")
+		.append(super.toString())
+		.toString();
+	}
 }

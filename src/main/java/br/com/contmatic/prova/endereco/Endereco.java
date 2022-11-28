@@ -1,8 +1,64 @@
 package br.com.contmatic.prova.endereco;
 
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarCaractereEspecial;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEspaco;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarLetras;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNulo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNumeros;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarVazio;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoFixo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMinimo;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMaximo;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_TAMANHO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_TAMANHO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERE_ESPECIAL;
 import java.util.Objects;
-
-import br.com.contmatic.prova.util.validacao.ValidacaoUtil;
 
 public class Endereco {
 
@@ -29,16 +85,13 @@ public class Endereco {
 	}
 
 	public void setCep(String cep) {
-		ValidacaoUtil.validarNulo(cep, "O campo CEP do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(cep, "O campo CEP do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(cep, "O campo CEP do Endereço precisa ser válido.");
-		if (cep.length() == 8) {
-			ValidacaoUtil.validarLetras(cep, "O campo CEP do Endereço deve conter somente números.");
-			ValidacaoUtil.validarCaractereEspecial(cep, "O campo CEP do Endereço deve conter somente números.");
-			this.cep = cep;
-		} else {
-			throw new IllegalArgumentException("O campo CEP do Endereço deve conter 8 caracteres.");
-		}
+		validarNulo(cep, CEP_MENSAGEM_NULO);
+		validarVazio(cep, CEP_MENSAGEM_VAZIO);
+		validarEspaco(cep, CEP_MENSAGEM_ESPACO);
+		validarTamanhoFixo(cep, CEP_TAMANHO_FIXO, CEP_MENSAGEM_TAMANHO);
+		validarLetras(cep, CEP_MENSAGEM_LETRAS);
+		validarCaractereEspecial(cep, CEP_MENSAGEM_CARACTERE_ESPECIAL);
+		this.cep = cep;
 	}
 
 	public String getNumero() {
@@ -46,16 +99,13 @@ public class Endereco {
 	}
 
 	public void setNumero(String numero) {
-		ValidacaoUtil.validarNulo(numero, "O campo Número do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(numero, "O campo Número do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(numero, "O campo Número do Endereço precisa ser válido.");
-		if (numero.length() >= 1 && numero.length() <= 4) {
-			ValidacaoUtil.validarLetras(numero, "O campo Número do Endereço só pode conter números.");
-			ValidacaoUtil.validarCaractereEspecial(numero, "O campo Número do Endereço só pode conter números.");
-			this.numero = numero;
-		} else {
-			throw new IllegalArgumentException("O campo Número do Endereço deve conter de 1 a 4 caracteres.");
-		}
+		validarNulo(numero, NUMERO_MENSAGEM_NULO);
+		validarVazio(numero, NUMERO_MENSAGEM_VAZIO);
+		validarEspaco(numero, NUMERO_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(numero, NUMERO_TAMANHO_MINIMO, NUMERO_MENSAGEM_TAMANHO_MINIMO);
+		validarTamanhoMaximo(numero, NUMERO_TAMANHO_MAXIMO, NUMERO_MENSAGEM_TAMANHO_MAXIMO);
+		validarCaractereEspecial(numero, NUMERO_MENSAGEM_CARACTERE_ESPECIAL);
+		this.numero = numero;
 	}
 
 	public String getLogradouro() {
@@ -63,16 +113,14 @@ public class Endereco {
 	}
 
 	public void setLogradouro(String logradouro) {
-		ValidacaoUtil.validarNulo(logradouro, "O campo Logradouro do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(logradouro, "O campo Logradouro do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(logradouro, "O campo Logradouro do Endereço precisa ser válido.");
-		if (logradouro.length() >= 3 && logradouro.length() <= 60) {
-			ValidacaoUtil.validarNumeros(logradouro, "O campo Logradouro do Endereço só pode conter letras.");
-			ValidacaoUtil.validarCaractereEspecial(logradouro, "O campo Logradouro do Endereço não pode ter caracteres especiais.");
-			this.logradouro = logradouro;
-		} else {
-			throw new IllegalArgumentException("O campo Logradouro do Endereço deve conter de 3 a 60 caracteres.");
-		}
+		validarNulo(logradouro, LOGRADOURO_MENSAGEM_NULO);
+		validarVazio(logradouro, LOGRADOURO_MENSAGEM_VAZIO);
+		validarEspaco(logradouro, LOGRADOURO_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(logradouro, LOGRADOURO_TAMANHO_MINIMO, LOGRADOURO_MENSAGEM_TAMANHO_MINIMO);
+		validarNumeros(logradouro, LOGRADOURO_MENSAGEM_NUMEROS);
+		validarTamanhoMaximo(logradouro, LOGRADOURO_TAMANHO_MAXIMO, LOGRADOURO_MENSAGEM_TAMANHO_MAXIMO);
+		validarCaractereEspecial(logradouro, LOGRADOURO_MENSAGEM_CARACTERE_ESPECIAL);
+		this.logradouro = logradouro;
 	}
 
 	public String getBairro() {
@@ -80,15 +128,14 @@ public class Endereco {
 	}
 
 	public void setBairro(String bairro) {
-		ValidacaoUtil.validarNulo(bairro, "O campo Bairro do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(bairro, "O campo Bairro do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(bairro, "O campo Bairro do Endereço precisa ser válido.");
-		if (bairro.length() >= 3 && bairro.length() <= 30) {
-			ValidacaoUtil.validarCaractereEspecial(bairro, "O campo Bairro do Endereço só pode conter letras.");
-			this.bairro = bairro;
-		} else {
-			throw new IllegalArgumentException("O campo Bairro do Endereço deve conter de 3 a 30 caracteres.");
-		}
+		validarNulo(bairro, BAIRRO_MENSAGEM_NULO);
+		validarVazio(bairro, BAIRRO_MENSAGEM_VAZIO);
+		validarEspaco(bairro, BAIRRO_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(bairro, BAIRRO_TAMANHO_MINIMO, BAIRRO_MENSAGEM_TAMANHO_MINIMO);
+		validarTamanhoMaximo(bairro, BAIRRO_TAMANHO_MAXIMO, BAIRRO_MENSAGEM_TAMANHO_MAXIMO);
+		validarNumeros(bairro, BAIRRO_MENSAGEM_NUMEROS);
+		validarCaractereEspecial(bairro, BAIRRO_MENSAGEM_CARACTERE_ESPECIAL);
+		this.bairro = bairro;
 	}
 
 	public String getCidade() {
@@ -96,17 +143,14 @@ public class Endereco {
 	}
 
 	public void setCidade(String cidade) {
-		ValidacaoUtil.validarNulo(cidade, "O campo Cidade do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(cidade, "O campo Cidade do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(cidade, "O campo Cidade do Endereço precisa ser válido.");
-		if (cidade.length() >= 3 && cidade.length() <= 20) {
-			ValidacaoUtil.validarCaractereEspecial(cidade, "O campo Cidade do Endereço deve conter somente letras.");
-			ValidacaoUtil.validarNumeros(cidade, "O campo Cidade do Endereço deve conter somente letras.");
-			
-			this.cidade = cidade;
-		} else {
-			throw new IllegalArgumentException("O campo Cidade do Endereço deve conter de 3 a 20 caracteres.");
-		}
+		validarNulo(cidade, CIDADE_MENSAGEM_NULO);
+		validarVazio(cidade, CIDADE_MENSAGEM_VAZIO);
+		validarEspaco(cidade, CIDADE_MENSAGEM_ESPACO);
+		validarTamanhoMinimo(cidade, CIDADE_TAMANHO_MINIMO, CIDADE_MENSAGEM_TAMANHO_MINIMO);
+		validarTamanhoMaximo(cidade, CIDADE_TAMANHO_MAXIMO, CIDADE_MENSAGEM_TAMANHO_MAXIMO);
+		validarCaractereEspecial(cidade, CIDADE_MENSAGEM_CARACTERE_ESPECIAL);
+		validarNumeros(cidade, CIDADE_MENSAGEM_NUMEROS);
+		this.cidade = cidade;
 	}
 
 	public String getUf() {
@@ -114,22 +158,13 @@ public class Endereco {
 	}
 
 	public void setUf(String uf) {
-		ValidacaoUtil.validarNulo(uf, "O campo UF do Endereço é obrigatório.");
-		ValidacaoUtil.validarVazio(uf, "O campo UF do Endereço não pode estar vazio.");
-		ValidacaoUtil.validarEspaco(uf, "O campo UF do Endereço precisa ser válido.");
-		if (uf.length() == 2) {
-			ValidacaoUtil.validarNumeros(uf, "O campo UF do Endereço deve conter somente letras.");
-			ValidacaoUtil.validarCaractereEspecial(uf, "O campo UF do Endereço deve conter somente letras.");
-			this.uf = uf;
-		} else {
-			throw new IllegalArgumentException("O campo UF do Endereço deve conter 2 caracteres.");
-		}
-	}
-
-	@Override
-	public String toString() {
-		return "Endereco [cep=" + cep + ", numero=" + numero + ", logradouro=" + logradouro + ", bairro=" + bairro
-				+ ", cidade=" + cidade + ", uf=" + uf + "]";
+		validarNulo(uf, UF_MENSAGEM_NULO);
+		validarVazio(uf, UF_MENSAGEM_VAZIO);
+		validarEspaco(uf, UF_MENSAGEM_ESPACO);
+		validarTamanhoFixo(uf, UF_TAMANHO_FIXO, UF_MENSAGEM_TAMANHO);
+		validarNumeros(uf, UF_MENSAGEM_NUMEROS);
+		validarCaractereEspecial(uf, UF_MENSAGEM_CARACTERE_ESPECIAL);
+		this.uf = uf;
 	}
 
 	@Override
@@ -139,13 +174,35 @@ public class Endereco {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}	
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}	
+		if (getClass() != obj.getClass()) {
 			return false;
+		}	
 		Endereco other = (Endereco) obj;
-		return Objects.equals(cep, other.cep) && Objects.equals(numero, other.numero);
+		return Objects.equals(cep, other.cep) && Objects.equals(numero, other.numero); 
+	}
+
+	@Override
+	public String toString() {
+		return new StringBuilder()
+		.append("Endereco [cep=")
+		.append(cep)
+		.append(", numero=")
+		.append(numero)
+		.append(", logradouro=")
+		.append(logradouro)
+		.append(", bairro=")
+		.append(bairro)
+		.append(", cidade=")
+		.append(cidade)
+		.append(", uf=")
+		.append(uf)
+		.append("]")
+		.toString();
 	}
 }
