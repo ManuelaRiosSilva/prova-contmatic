@@ -1,6 +1,8 @@
 package br.com.contmatic.prova.constantes;
 
-public class ClienteConstante {
+public final class ClienteConstante {
+    
+    public static final int CPF_TAMANHO_FIXO = 11;
 	
 	public static final int NOME_TAMANHO_MINIMO = 5;
 	
@@ -11,10 +13,18 @@ public class ClienteConstante {
 	public static final int EMAIL_TAMANHO_MAXIMO = 40;
 	
 	public static final String NOME_DA_CLASSE = "Cliente";
+
+	public static final String CPF_MENSAGEM_NULO = "O campo CPF do Cliente é obrigatório.";
+	
+	public static final String CPF_MENSAGEM_VAZIO = "O campo CPF do Cliente não pode estar vazio.";
+	
+	public static final String CPF_MENSAGEM_TAMANHO = "O campo CPF do Cliente deve possuir 11 dígitos.";
 	
 	public static final String CPF_MENSAGEM_LETRAS = "O campo CPF do Cliente deve conter somente números.";
 	
 	public static final String CPF_MENSAGEM_CARACTERE_ESPECIAL = "O campo CPF do Cliente deve conter somente números.";
+	
+	public static final String CPF_MENSAGEM_INVALIDO = "O campo CPF do Cliente está inválido.";
 	
 	public static final String CPF_MENSAGEM_ESPACO = "O campo CPF do Cliente precisa ser válido.";
 	
@@ -24,9 +34,7 @@ public class ClienteConstante {
 	
 	public static final String NOME_MENSAGEM_ESPACO = "O campo Nome do Cliente precisa ser válido.";
 	
-	public static final String NOME_MENSAGEM_TAMANHO_MINIMO = "O campo Nome do Cliente deve possuir no mínimo 5 caracteres.";
-	
-	public static final String NOME_MENSAGEM_TAMANHO_MAXIMO = "O campo Nome do Cliente deve possuir no máximo 40 caracteres.";
+	public static final String NOME_MENSAGEM_TAMANHO= "O campo Nome do Cliente deve possuir no mínimo 5 e no máximo 40 caracteres.";
 	
 	public static final String NOME_MENSAGEM_NUMEROS = "O campo Nome do Cliente deve conter somente letras.";
 	
@@ -38,13 +46,9 @@ public class ClienteConstante {
 
 	public static final String EMAIL_MENSAGEM_VAZIO = "O campo Email do Cliente não pode estar vazio.";
 	
-	public static final String EMAIL_MENSAGEM_TAMANHO_MINIMO = "O campo Email do Cliente deve possuir no mínimo 18 caracteres.";
-	
-	public static final String EMAIL_MENSAGEM_TAMANHO_MAXIMO = "O campo Email do Cliente deve possuir no máximo 40 caracteres.";
-	
+	public static final String EMAIL_MENSAGEM_TAMANHO = "O campo Email do Cliente deve possuir no mínimo 18 e no máximo 40 caracteres.";
+		
 	public static final String EMAIL_MENSAGEM_INVALIDO = "O campo Email do Cliente está inválido.";
-	
-	public static final String EMAIL_REGEX = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.]+@[a-zA-Z0-9.]+$";
 	
 	private ClienteConstante() {
 		super();

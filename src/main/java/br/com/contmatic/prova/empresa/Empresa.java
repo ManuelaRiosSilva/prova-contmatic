@@ -1,170 +1,116 @@
 package br.com.contmatic.prova.empresa;
 
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_INVALIDO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_TAMANHO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_TAMANHO_FIXO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MAXIMA_MENSAGEM;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_ENDERECOS_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_TAMANHO_MAXIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.LISTA_TELEFONES_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.NOME_FANTASIA_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.util.validacao.DataUtil.validarDataMaxima;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEspaco;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaNula;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaTamanhoMaximo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarListaVazia;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNulo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMaximo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMinimo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarVazio;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.Set;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.joda.time.DateTime;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.endereco.Endereco;
 import br.com.contmatic.prova.telefone.Telefone;
-import br.com.contmatic.prova.util.validacao.CNPJUtil;
+import br.com.contmatic.prova.util.validacao.Space;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 
 public class Empresa extends Auditoria {
+    
+    @NotBlank(message = CNPJ_MENSAGEM_NULO)
+    @Size(min = CNPJ_TAMANHO_FIXO, max = CNPJ_TAMANHO_FIXO, message = CNPJ_MENSAGEM_TAMANHO)
+    @Space(message = CNPJ_MENSAGEM_ESPACO)
+    @Pattern(regexp = REGEX_VALIDAR_LETRAS, message = CNPJ_MENSAGEM_LETRAS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = CNPJ_MENSAGEM_CARACTERE_ESPECIAL)
+    @CNPJ(message = CNPJ_MENSAGEM_INVALIDO)
+    private String cnpj;
 
-	private String cnpj;
+    @NotNull(message = NOME_FANTASIA_MENSAGEM_NULO)
+    @NotEmpty(message = NOME_FANTASIA_MENSAGEM_VAZIO)
+    @Space(message = NOME_FANTASIA_MENSAGEM_ESPACO)
+    @Size(min = NOME_FANTASIA_TAMANHO_MINIMO, max = NOME_FANTASIA_TAMANHO_MAXIMO, message = NOME_FANTASIA_MENSAGEM_TAMANHO)
+    private String nomeFantasia;
 
-	private String nomeFantasia;
-
+    @NotNull(message = RAZAO_SOCIAL_MENSAGEM_NULO)
+    @NotEmpty(message = RAZAO_SOCIAL_MENSAGEM_VAZIO)
+    @Space(message = RAZAO_SOCIAL_MENSAGEM_ESPACO)
+    @Size(min = RAZAO_SOCIAL_TAMANHO_MINIMO, max = RAZAO_SOCIAL_TAMANHO_MAXIMO, message = RAZAO_SOCIAL_MENSAGEM_TAMANHO) 
 	private String razaoSocial;
 
-	private List<Telefone> telefones;
+    @NotNull(message = LISTA_TELEFONES_MENSAGEM_NULO)
+    @NotEmpty(message = LISTA_TELEFONES_MENSAGEM_VAZIO)
+    @Size(min = LISTA_TELEFONES_TAMANHO_MINIMO, max = LISTA_TELEFONES_TAMANHO_MAXIMO, message = LISTA_TELEFONES_MENSAGEM_TAMANHO)
+	private Set<Telefone> telefones;
 
-	private List<Endereco> enderecos;
-	
-	private LocalDate dataAbertura;
+    @NotNull(message = LISTA_ENDERECOS_MENSAGEM_NULO)
+    @NotEmpty(message = LISTA_ENDERECOS_MENSAGEM_VAZIO)
+    @Size(min = LISTA_ENDERECOS_TAMANHO_MINIMO, max = LISTA_ENDERECOS_TAMANHO_MAXIMO, message = LISTA_ENDERECOS_MENSAGEM_TAMANHO)
+	private Set<Endereco> enderecos;
+ 
+    @NotNull(message = DATA_ABERTURA_MENSAGEM_NULO)
+    @Past (message = DATA_ABERTURA_MAXIMA_MENSAGEM)
+	private DateTime dataAbertura;
 
 	public Empresa(String cnpj) {
 		this.setCnpj(cnpj);
 	}
 
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		CNPJUtil.validar(cnpj);
-		this.cnpj = cnpj;
-	}
-
-	public String getNomeFantasia() {
-		return nomeFantasia;
-	}
-
-	public void setNomeFantasia(String nomeFantasia) {
-		validarNulo(nomeFantasia, NOME_FANTASIA_MENSAGEM_NULO);
-		validarVazio(nomeFantasia, NOME_FANTASIA_MENSAGEM_VAZIO);
-		validarEspaco(nomeFantasia, NOME_FANTASIA_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(nomeFantasia, NOME_FANTASIA_TAMANHO_MINIMO, NOME_FANTASIA_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(nomeFantasia, NOME_FANTASIA_TAMANHO_MAXIMO, NOME_FANTASIA_MENSAGEM_TAMANHO_MAXIMO);
-		this.nomeFantasia = nomeFantasia;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		validarNulo(razaoSocial, RAZAO_SOCIAL_MENSAGEM_NULO);
-		validarVazio(razaoSocial, RAZAO_SOCIAL_MENSAGEM_VAZIO);
-		validarEspaco(razaoSocial, RAZAO_SOCIAL_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(razaoSocial, RAZAO_SOCIAL_TAMANHO_MINIMO, RAZAO_SOCIAL_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(razaoSocial, RAZAO_SOCIAL_TAMANHO_MAXIMO, RAZAO_SOCIAL_MENSAGEM_TAMANHO_MAXIMO);
-		this.razaoSocial = razaoSocial;
-	}
-
-	public List<Telefone> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(List<Telefone> telefones) {
-		validarListaNula(telefones, LISTA_TELEFONES_MENSAGEM_NULO);
-		validarListaVazia(telefones,LISTA_TELEFONES_MENSAGEM_VAZIO);
-		validarListaTamanhoMaximo(telefones, LISTA_TELEFONES_TAMANHO_MAXIMO, LISTA_TELEFONES_MENSAGEM_TAMANHO_MAXIMO);
-		this.telefones = telefones;
-	}
-
-	public List<Endereco> getEnderecos() {
-		return enderecos;
-	}
-
-	public void setEnderecos(List<Endereco> enderecos) {
-		validarListaNula(enderecos, LISTA_ENDERECOS_MENSAGEM_NULO);
-		validarListaVazia(enderecos, LISTA_ENDERECOS_MENSAGEM_VAZIO);
-		validarListaTamanhoMaximo(enderecos, LISTA_ENDERECOS_TAMANHO_MAXIMO, LISTA_ENDERECOS_MENSAGEM_TAMANHO_MAXIMO);
-		this.enderecos = enderecos;
-	}
-
-	public LocalDate getDataAbertura() {
-		return dataAbertura;
-	}
-
-	public void setDataAbertura(LocalDate dataAbertura) {
-		validarNulo(dataAbertura, DATA_ABERTURA_MENSAGEM_NULO);
-		validarDataMaxima(dataAbertura, DATA_ABERTURA_MAXIMA_MENSAGEM);
-		this.dataAbertura = dataAbertura;
-	}
-
-	@Override
+    @Override
 	public int hashCode() {
-		return Objects.hash(cnpj);
+	    return reflectionHashCode(cnpj);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-	 	if (getClass() != obj.getClass()) {
- 			return false;
-		}
-		Empresa other = (Empresa) obj;
-		return Objects.equals(cnpj, other.cnpj);
+	    return reflectionEquals(this, obj);
 	}
 
 	@Override
 	public String toString() {
-		return new StringBuilder()
-		.append("Empresa [cnpj=")
-		.append(cnpj)
-		.append(", nomeFantasia=")
-		.append(nomeFantasia)
-		.append(", razaoSocial=")
-		.append(razaoSocial)
-		.append(", telefones=")
-		.append(telefones)
-		.append(", enderecos=")
-		.append(enderecos)
-		.append(", dataAbertura=")
-		.append(dataAbertura)
-		.append("]\n")
-		.append(super.toString())
-		.toString();
+	    return new ToStringBuilder(this).appendSuper(super.toString()).toString();
 	}
 }

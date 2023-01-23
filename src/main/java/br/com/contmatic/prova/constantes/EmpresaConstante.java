@@ -1,7 +1,9 @@
 package br.com.contmatic.prova.constantes;
 
-public class EmpresaConstante {
+public final class EmpresaConstante {
 	
+    public static final int CNPJ_TAMANHO_FIXO = 14;
+    
 	public static final int NOME_FANTASIA_TAMANHO_MINIMO = 5;
 	
 	public static final int NOME_FANTASIA_TAMANHO_MAXIMO = 35;
@@ -40,9 +42,7 @@ public class EmpresaConstante {
 	
 	public static final String NOME_FANTASIA_MENSAGEM_ESPACO = "O campo Nome Fantasia da Empresa precisa ser válido.";
 	
-	public static final String NOME_FANTASIA_MENSAGEM_TAMANHO_MINIMO = "O campo Nome Fantasia da Empresa deve possuir no mínimo 5 caracteres.";
-	
-	public static final String NOME_FANTASIA_MENSAGEM_TAMANHO_MAXIMO = "O campo Nome Fantasia da Empresa deve possuir no máximo 35 caracteres.";
+	public static final String NOME_FANTASIA_MENSAGEM_TAMANHO = "O campo Nome Fantasia da Empresa deve possuir no mínimo 5 e no máximo 35 caracteres.";
 	
 	public static final String RAZAO_SOCIAL_MENSAGEM_NULO = "O campo Razão Social da Empresa é obrigatório.";
 	
@@ -50,21 +50,19 @@ public class EmpresaConstante {
 	
 	public static final String RAZAO_SOCIAL_MENSAGEM_ESPACO = "O campo Razão Social da Empresa precisa ser válido.";
 	
-	public static final String RAZAO_SOCIAL_MENSAGEM_TAMANHO_MINIMO = "O campo Razão Social da Empresa deve possuir no mínimo 5 caracteres.";
-	
-	public static final String RAZAO_SOCIAL_MENSAGEM_TAMANHO_MAXIMO = "O campo Razão Social da Empresa deve possuir no máximo 50 caracteres.";
+	public static final String RAZAO_SOCIAL_MENSAGEM_TAMANHO = "O campo Razão Social da Empresa deve possuir no mínimo 5 e no máximo 50 caracteres.";
 	
 	public static final String LISTA_TELEFONES_MENSAGEM_NULO = "O campo lista de Telefones deve conter pelo menos 1 registro.";
 	
 	public static final String LISTA_TELEFONES_MENSAGEM_VAZIO = "O campo lista de Telefones deve conter pelo menos 1 registro.";
 	
-	public static final String LISTA_TELEFONES_MENSAGEM_TAMANHO_MAXIMO = "O campo lista de Telefones não pode ter mais que 5 registros.";
+	public static final String LISTA_TELEFONES_MENSAGEM_TAMANHO = "O campo lista de Telefones não pode ter mais que 5 registros.";
 	
 	public static final String LISTA_ENDERECOS_MENSAGEM_NULO = "O campo lista de Endereços deve conter pelo menos 1 registro."; 
 	
 	public static final String LISTA_ENDERECOS_MENSAGEM_VAZIO = "O campo lista de Endereços deve conter pelo menos 1 registro.";
 	
-	public static final String LISTA_ENDERECOS_MENSAGEM_TAMANHO_MAXIMO = "O campo lista de Endereços não pode ter mais que 5 registros.";
+	public static final String LISTA_ENDERECOS_MENSAGEM_TAMANHO = "O campo lista de Endereços não pode ter mais que 5 registros.";
 	
 	public static final String DATA_ABERTURA_MENSAGEM_NULO = "O campo Data de Abertura da Empresa é obrigatório.";
 	

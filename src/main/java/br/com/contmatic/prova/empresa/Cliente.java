@@ -2,129 +2,88 @@ package br.com.contmatic.prova.empresa;
 
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_DA_CLASSE;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_NUMEROS;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validacaoNulo;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validacaoVazio;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validar;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarCaractereEspecial;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEmail;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEspaco;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarLetras;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNulo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNumeros;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMaximo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMinimo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarVazio;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.EMAIL_REGEX;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_NUMEROS;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
-import java.util.Objects;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
+import br.com.contmatic.prova.util.validacao.Space;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Cliente extends Auditoria{
+@Getter
+@Setter
+public class Cliente extends Auditoria {
 
-	private String cpf;
+    @NotBlank(message = CPF_MENSAGEM_NULO)
+    @Space(message = CPF_MENSAGEM_ESPACO)
+    @Size(min = 11, max = 11, message = CPF_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_LETRAS, message = CPF_MENSAGEM_LETRAS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = CPF_MENSAGEM_CARACTERE_ESPECIAL)
+    @CPF(message = CPF_MENSAGEM_INVALIDO)
+    private String cpf;
 
-	private String nome;
+    @NotNull(message = NOME_MENSAGEM_NULO)
+    @NotEmpty(message = NOME_MENSAGEM_VAZIO)
+    @Space(message = NOME_MENSAGEM_ESPACO)
+    @Size(min = 5, max = 40, message = NOME_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message =  NOME_MENSAGEM_NUMEROS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = NOME_MENSAGEM_CARACTERE_ESPECIAL) 
+    private String nome;
 
-	private String email;
+    @NotNull(message = EMAIL_MENSAGEM_NULO)
+    @NotEmpty(message = EMAIL_MENSAGEM_VAZIO)
+    @Space(message = EMAIL_MENSAGEM_ESPACO)
+    @Size(min = 18, max = 40, message = EMAIL_MENSAGEM_TAMANHO)
+    @Email(regexp = EMAIL_REGEX, message = EMAIL_MENSAGEM_INVALIDO)
+    private String email;
 
-	public Cliente(String cpf) {
- 	 	super();
-		this.setCpf(cpf);
-	}
+    public Cliente(String cpf) {
+        super();
+        this.setCpf(cpf);
+    }
 
-	public String getCpf() {
-		return cpf;
-	}
+    @Override
+    public int hashCode() {
+        return reflectionHashCode(cpf);
+    }
 
-	public void setCpf(String cpf) {
-		validacaoNulo(cpf, NOME_DA_CLASSE);
-		validacaoVazio(cpf, NOME_DA_CLASSE);
-		validarEspaco(cpf, CPF_MENSAGEM_ESPACO);
-		validarLetras(cpf, CPF_MENSAGEM_LETRAS);
-		validarCaractereEspecial(cpf, CPF_MENSAGEM_CARACTERE_ESPECIAL);
-		validar(cpf, NOME_DA_CLASSE);
-		this.cpf = cpf;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        return reflectionEquals(this, obj);
+    }
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		validarNulo(nome, NOME_MENSAGEM_NULO);
-		validarVazio(nome, NOME_MENSAGEM_VAZIO);
-		validarEspaco(nome, NOME_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(nome, NOME_TAMANHO_MINIMO, NOME_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(nome, NOME_TAMANHO_MAXIMO, NOME_MENSAGEM_TAMANHO_MAXIMO);
-		validarCaractereEspecial(nome, NOME_MENSAGEM_CARACTERE_ESPECIAL);
-		validarNumeros(nome, NOME_MENSAGEM_NUMEROS);
-		this.nome = nome;		
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		validarNulo(email, EMAIL_MENSAGEM_NULO);
-		validarVazio(email, EMAIL_MENSAGEM_VAZIO);
-		validarEspaco(email, EMAIL_MENSAGEM_ESPACO);
-		validarEmail(email, EMAIL_MENSAGEM_INVALIDO);
-		validarTamanhoMinimo(email, EMAIL_TAMANHO_MINIMO, EMAIL_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(email, EMAIL_TAMANHO_MAXIMO, EMAIL_MENSAGEM_TAMANHO_MAXIMO);
-		this.email = email;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cpf);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}	
-		if (obj == null) {
-			return false;
-		}	
-		if (getClass() != obj.getClass()) {
-			return false;
-		}	
-		Cliente other = (Cliente) obj;
-		return Objects.equals(cpf, other.cpf);
-	}
-
-	@Override
-	public String toString() {
-		return new StringBuilder()
-		.append("Cliente [cpf=")
-		.append(cpf)
-		.append(", nome=")
-		.append(nome)
-		.append(", email=")
-		.append(email)
-		.append("]\n")
-		.append(super.toString())
-		.toString();
-	}
+    @Override
+    public String toString() {
+        return reflectionToString(this, MULTI_LINE_STYLE);
+    }
 }

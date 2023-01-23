@@ -1,6 +1,6 @@
 package br.com.contmatic.prova.constantes;
 
-public class EnderecoConstante {
+public final class EnderecoConstante {
 
 	public static final int CEP_TAMANHO_FIXO = 8;
 			
@@ -40,9 +40,7 @@ public class EnderecoConstante {
 	
 	public static final String NUMERO_MENSAGEM_ESPACO = "O campo Número do Endereço precisa ser válido.";
 	
-	public static final String NUMERO_MENSAGEM_TAMANHO_MINIMO = "O campo Número do Endereço deve possuir no mínimo 1 caractere.";
-	
-	public static final String NUMERO_MENSAGEM_TAMANHO_MAXIMO = "O campo Número do Endereço deve possuir no máximo 4 caracteres.";
+	public static final String NUMERO_MENSAGEM_TAMANHO= "O campo Número do Endereço deve possuir no mínimo 1 e no máximo 4 caracteres.";
 	
 	public static final String NUMERO_MENSAGEM_CARACTERE_ESPECIAL = "O campo Número do Endereço deve conter somente números.";
 	
@@ -52,10 +50,8 @@ public class EnderecoConstante {
 	
 	public static final String LOGRADOURO_MENSAGEM_ESPACO = "O campo Logradouro do Endereço precisa ser válido.";
 	
-	public static final String LOGRADOURO_MENSAGEM_TAMANHO_MINIMO = "O campo Logradouro do Endereço deve possuir no mínimo 3 caracteres.";
-	
-	public static final String LOGRADOURO_MENSAGEM_TAMANHO_MAXIMO = "O campo Logradouro do Endereço deve possuir no máximo 60 caracteres.";
-	
+	public static final String LOGRADOURO_MENSAGEM_TAMANHO = "O campo Logradouro do Endereço deve possuir no mínimo 3 e no máximo 60 caracteres.";
+		
 	public static final String LOGRADOURO_MENSAGEM_NUMEROS = "O campo Logradouro do Endereço deve conter somente letras.";
 	
 	public static final String LOGRADOURO_MENSAGEM_CARACTERE_ESPECIAL = "O campo Logradouro do Endereço deve conter somente letras.";
@@ -66,10 +62,8 @@ public class EnderecoConstante {
 	
 	public static final String BAIRRO_MENSAGEM_ESPACO = "O campo Bairro do Endereço precisa ser válido.";
 	
-	public static final String BAIRRO_MENSAGEM_TAMANHO_MINIMO = "O campo Bairro do Endereço deve possuir no mínimo 3 caracteres.";
-	
-	public static final String BAIRRO_MENSAGEM_TAMANHO_MAXIMO = "O campo Bairro do Endereço deve possuir no máximo 30 caracteres.";
-	
+	public static final String BAIRRO_MENSAGEM_TAMANHO = "O campo Bairro do Endereço deve possuir no mínimo 3 e no máximo 30 caracteres.";
+		
 	public static final String BAIRRO_MENSAGEM_NUMEROS = "O campo Bairro do Endereço deve conter somente letras.";
 	
 	public static final String BAIRRO_MENSAGEM_CARACTERE_ESPECIAL = "O campo Bairro do Endereço deve conter somente letras.";
@@ -80,10 +74,8 @@ public class EnderecoConstante {
 	
 	public static final String CIDADE_MENSAGEM_ESPACO = "O campo Cidade do Endereço precisa ser válido.";
 	
-	public static final String CIDADE_MENSAGEM_TAMANHO_MINIMO = "O campo Cidade do Endereço deve possuir no mínimo 3 caracteres.";
-	
-	public static final String CIDADE_MENSAGEM_TAMANHO_MAXIMO = "O campo Cidade do Endereço deve possuir no máximo 20 caracteres.";
-	
+	public static final String CIDADE_MENSAGEM_TAMANHO = "O campo Cidade do Endereço deve possuir no mínimo 3 e no máximo 20 caracteres.";
+		
 	public static final String CIDADE_MENSAGEM_NUMEROS = "O campo Cidade do Endereço deve conter somente letras.";
 	
 	public static final String CIDADE_MENSAGEM_CARACTERE_ESPECIAL = "O campo Cidade do Endereço deve conter somente letras.";

@@ -5,17 +5,20 @@ import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSA
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_NUMEROS;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_LETRAS;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MAXIMA_MENSAGEM;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_TAMANHO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_VAZIO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_TAMANHO_FIXO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MINIMA_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_LETRAS;
@@ -23,219 +26,126 @@ import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_M
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_TAMANHO_FIXO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_DA_CLASSE;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_NUMEROS;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MAXIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MAXIMO_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MENSAGEM_NULO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MINIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MINIMO_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_NUMEROS;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_TAMANHO_MAXIMO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_TAMANHO_MINIMO;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_TAMANHO_MAXIMO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_TAMANHO_MINIMO;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validacaoNulo;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validacaoVazio;
-import static br.com.contmatic.prova.util.validacao.CPFUtil.validar;
-import static br.com.contmatic.prova.util.validacao.DataUtil.validarDataNascimentoMaxima;
-import static br.com.contmatic.prova.util.validacao.DataUtil.validarDataNascimentoMinima;
-import static br.com.contmatic.prova.util.validacao.SalarioUtil.validarSalarioMaximo;
-import static br.com.contmatic.prova.util.validacao.SalarioUtil.validarSalarioMinimo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarCaractereEspecial;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarEspaco;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarLetras;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNulo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarNumeros;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoFixo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMaximo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarTamanhoMinimo;
-import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.validarVazio;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
+import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_NUMEROS;
+import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
+import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
+import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
+import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Objects;
+
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CPF;
+import org.joda.time.DateTime;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
-
+import br.com.contmatic.prova.util.validacao.Age;
+import br.com.contmatic.prova.util.validacao.Space;
+import lombok.Getter;
+import lombok.Setter;
+@Getter
+@Setter
 public class Funcionario extends Auditoria{
 
+    @NotNull(message = MATRICULA_MENSAGEM_NULO)
+    @NotEmpty(message = MATRICULA_MENSAGEM_VAZIO)
+    @Space(message = MATRICULA_MENSAGEM_ESPACO)
+    @Size(min = MATRICULA_TAMANHO_FIXO, max = MATRICULA_TAMANHO_FIXO, message = MATRICULA_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_LETRAS, message = MATRICULA_MENSAGEM_LETRAS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = MATRICULA_MENSAGEM_CARACTERE_ESPECIAL)
 	private String matricula;
 
+    @NotNull(message = CPF_MENSAGEM_NULO)
+    @NotEmpty(message = CPF_MENSAGEM_VAZIO)
+    @Space(message = CPF_MENSAGEM_ESPACO)
+    @Size(min = CPF_TAMANHO_FIXO, max = CPF_TAMANHO_FIXO, message = CPF_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_LETRAS, message = CPF_MENSAGEM_LETRAS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = CPF_MENSAGEM_CARACTERE_ESPECIAL)
+    @CPF(message = CPF_MENSAGEM_INVALIDO)
 	private String cpf;
 
+    @NotNull(message = NOME_MENSAGEM_NULO)
+    @NotEmpty(message = NOME_MENSAGEM_VAZIO)
+    @Space(message = NOME_MENSAGEM_ESPACO)
+    @Size(min = NOME_TAMANHO_MINIMO, max = NOME_TAMANHO_MAXIMO, message = NOME_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message = NOME_MENSAGEM_NUMEROS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = NOME_MENSAGEM_CARACTERE_ESPECIAL)
 	private String nome;
 
+    @NotNull(message = CARGO_MENSAGEM_NULO)
+    @NotEmpty(message = CARGO_MENSAGEM_VAZIO)
+    @Space(message = CARGO_MENSAGEM_ESPACO)
+    @Size(min = CARGO_TAMANHO_MINIMO, max = CARGO_TAMANHO_MAXIMO, message = CARGO_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message = CARGO_MENSAGEM_NUMEROS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = CARGO_MENSAGEM_CARACTERE_ESPECIAL)
 	private String cargo;
 
+    @NotNull(message = SETOR_MENSAGEM_NULO)
+    @NotEmpty(message = SETOR_MENSAGEM_VAZIO)
+    @Space(message = SETOR_MENSAGEM_ESPACO)
+    @Size( min = SETOR_TAMANHO_MINIMO, max = SETOR_TAMANHO_MAXIMO, message = SETOR_MENSAGEM_TAMANHO)
+    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message = SETOR_MENSAGEM_NUMEROS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = SETOR_MENSAGEM_CARACTERE_ESPECIAL)
 	private String setor;
 
-	private LocalDate dataNascimento;
+    @NotNull(message = DATA_NASCIMENTO_MENSAGEM_NULO)
+    @Age(message = DATA_NASCIMENTO_MENSAGEM)
+	private DateTime dataNascimento;
 
+	@NotNull(message = SALARIO_MENSAGEM_NULO)
+	@DecimalMin(value = SALARIO_MINIMO, message = SALARIO_MINIMO_MENSAGEM)
+	@DecimalMax(value = SALARIO_MAXIMO, message = SALARIO_MAXIMO_MENSAGEM)
 	private BigDecimal salario;
 
+	@NotNull(message = ATIVO_FUNCIONARIO_MENSAGEM_NULO)
 	private Boolean ativo;
 
 	public Funcionario(String matricula) {
 		super();
 		this.setMatricula(matricula);
 	}
-	
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		validarNulo(matricula, MATRICULA_MENSAGEM_NULO);
-		validarVazio(matricula, MATRICULA_MENSAGEM_VAZIO);
-		validarEspaco(matricula, MATRICULA_MENSAGEM_ESPACO);
-		validarTamanhoFixo(matricula, MATRICULA_TAMANHO_FIXO, MATRICULA_MENSAGEM_TAMANHO);
-		validarLetras(matricula, MATRICULA_MENSAGEM_LETRAS);
-		validarCaractereEspecial(matricula, MATRICULA_MENSAGEM_CARACTERE_ESPECIAL);
-		this.matricula = matricula;
-	}
-
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String cpf) {
-		validacaoNulo(cpf, NOME_DA_CLASSE);
-		validacaoVazio(cpf, NOME_DA_CLASSE);
-		validarEspaco(cpf, CPF_MENSAGEM_ESPACO);
-		validarLetras(cpf, CPF_MENSAGEM_LETRAS);
-		validarCaractereEspecial(cpf, CPF_MENSAGEM_CARACTERE_ESPECIAL);
-		validar(cpf, NOME_DA_CLASSE);
-		this.cpf = cpf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		validarNulo(nome, NOME_MENSAGEM_NULO);
-		validarVazio(nome, NOME_MENSAGEM_VAZIO);
-		validarEspaco(nome, NOME_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(nome, NOME_TAMANHO_MINIMO, NOME_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(nome, NOME_TAMANHO_MAXIMO, NOME_MENSAGEM_TAMANHO_MAXIMO);
-		validarNumeros(nome, NOME_MENSAGEM_NUMEROS);
-		validarCaractereEspecial(nome, NOME_MENSAGEM_CARACTERE_ESPECIAL);
-		this.nome = nome;
-	}
-
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		validarNulo(cargo, CARGO_MENSAGEM_NULO);
-		validarVazio(cargo, CARGO_MENSAGEM_VAZIO);
-		validarEspaco(cargo, CARGO_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(cargo, CARGO_TAMANHO_MINIMO, CARGO_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(cargo, CARGO_TAMANHO_MAXIMO, CARGO_MENSAGEM_TAMANHO_MAXIMO);
-		validarNumeros(cargo, CARGO_MENSAGEM_NUMEROS);
-		validarCaractereEspecial(cargo, CARGO_MENSAGEM_CARACTERE_ESPECIAL);
-		this.cargo = cargo;
-	}
-
-	public String getSetor() {
-		return setor;
-	}
-
-	public void setSetor(String setor) {
-		validarNulo(setor, SETOR_MENSAGEM_NULO);
-		validarVazio(setor, SETOR_MENSAGEM_VAZIO);
-		validarEspaco(setor, SETOR_MENSAGEM_ESPACO);
-		validarTamanhoMinimo(setor, SETOR_TAMANHO_MINIMO, SETOR_MENSAGEM_TAMANHO_MINIMO);
-		validarTamanhoMaximo(setor, SETOR_TAMANHO_MAXIMO, SETOR_MENSAGEM_TAMANHO_MAXIMO);
-		validarNumeros(setor, SETOR_MENSAGEM_NUMEROS);
-		validarCaractereEspecial(setor, SETOR_MENSAGEM_CARACTERE_ESPECIAL);
-		this.setor = setor;
-	}
-
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-
-	public void setDataNascimento(LocalDate dataNascimento) {
-		validarNulo(dataNascimento, DATA_NASCIMENTO_MENSAGEM_NULO);
-		validarDataNascimentoMinima(dataNascimento, DATA_NASCIMENTO_MINIMA_MENSAGEM);
-		validarDataNascimentoMaxima(dataNascimento, DATA_NASCIMENTO_MAXIMA_MENSAGEM);
-		this.dataNascimento = dataNascimento;
-	}
-
-	public BigDecimal getSalario() {
-		return salario;
-	}
-
-	public void setSalario(BigDecimal salario) {
-		validarNulo(salario, SALARIO_MENSAGEM_NULO);
-		validarSalarioMinimo(salario, SALARIO_MINIMO_MENSAGEM);
-		validarSalarioMaximo(salario, SALARIO_MAXIMO_MENSAGEM);
-		this.salario = salario;
-	}
-
-	public Boolean getAtivo() {
-		return ativo;
-	}
-
-	public void setAtivo(Boolean ativo) {
-		validarNulo(ativo, ATIVO_FUNCIONARIO_MENSAGEM_NULO);
-		this.ativo = ativo;
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(matricula);
+        return reflectionHashCode(matricula);
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Funcionario other = (Funcionario) obj;
-		return Objects.equals(matricula, other.matricula);
+        return reflectionEquals(this, obj);
 	}
 
 	@Override
 	public String toString() {
-		return new StringBuilder()
-		.append("Funcionario [matricula=")
-		.append(matricula)
-		.append(", cpf=")
-		.append(cpf)
-		.append(", nome=")
-		.append(nome)
-		.append(", cargo=")
-		.append(cargo)
-		.append(", setor=")
-		.append(setor)
-		.append(", dataNascimento=")
-		.append(dataNascimento)
-		.append(", salario=")
-		.append(salario)
-		.append(", ativo=")
-		.append(ativo)
-		.append("]")
-		.append(super.toString())
-		.toString();
+	    return reflectionToString(this, MULTI_LINE_STYLE);
 	}
 }

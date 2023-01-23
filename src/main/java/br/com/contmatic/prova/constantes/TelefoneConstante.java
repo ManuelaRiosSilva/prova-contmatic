@@ -1,6 +1,6 @@
 package br.com.contmatic.prova.constantes;
 
-public class TelefoneConstante {
+public final class TelefoneConstante {
 	
 	public static final int DDI_TAMANHO_FIXO = 2;
 	
@@ -38,9 +38,7 @@ public class TelefoneConstante {
 	
 	public static final String DDD_MENSAGEM_TERMINADO_EM_0 = "O campo DDD do Telefone não pode terminar em 0.";
 	
-	public static final String NUMERO_MENSAGEM_TAMANHO_MINIMO = "O campo Número do Telefone deve conter no mínimo 8 dígitos.";
-	
-	public static final String NUMERO_MENSAGEM_TAMANHO_MAXIMO = "O campo Número do Telefone deve conter no máximo 9 dígitos.";
+	public static final String NUMERO_MENSAGEM_TAMANHO = "O campo Número do Telefone deve conter no mínimo 8 e no máximo 9 dígitos.";
 	
 	public static final String NUMERO_MENSAGEM_NULO = "O campo Número do Telefone é obrigatório.";
 	
