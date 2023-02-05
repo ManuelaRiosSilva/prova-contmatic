@@ -40,6 +40,7 @@ import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_TAMANHO
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_TAMANHO;
@@ -59,6 +60,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import br.com.contmatic.prova.util.validacao.Space;
+import br.com.contmatic.prova.util.validacao.Uf;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -111,6 +113,7 @@ public class Endereco {
     @Size(min = UF_TAMANHO_FIXO, max = UF_TAMANHO_FIXO, message = UF_MENSAGEM_TAMANHO)
     @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message = UF_MENSAGEM_NUMEROS)
     @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = UF_MENSAGEM_CARACTERE_ESPECIAL)
+    @Uf(enumClass = EstadoType.class, message = UF_MENSAGEM_INVALIDO)
 	private String uf;
 
 	public Endereco(String cep, String numero) {

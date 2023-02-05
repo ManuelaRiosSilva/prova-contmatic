@@ -1,16 +1,17 @@
 package br.com.contmatic.prova.util;
 
+import static javax.validation.Validation.buildDefaultValidatorFactory;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 public class Violations {
     
-    private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    private static ValidatorFactory factory = buildDefaultValidatorFactory();
     
     private static Validator validator = factory.getValidator();
     

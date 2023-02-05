@@ -92,6 +92,8 @@ public final class EnderecoConstante {
 	
 	public static final String UF_MENSAGEM_CARACTERE_ESPECIAL = "O campo UF do Endereço deve possuir somente letras.";
 	
+	public static final String UF_MENSAGEM_INVALIDO = "O campo UF do Endereço precisa ser válido.";
+	
 	private EnderecoConstante() {
 		super();
 	}

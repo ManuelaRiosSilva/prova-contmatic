@@ -69,7 +69,6 @@ public class ClienteTest {
     @DisplayName("😀 Teste de Cliente válido")
     void deve_aceitar_um_cliente_valido() {
         Set<String> erros = getErros(cliente);
-        System.out.println(erros);
         assertThat(erros.size(), is(0));
     }
 

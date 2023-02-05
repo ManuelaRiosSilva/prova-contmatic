@@ -93,8 +93,7 @@ public abstract class Auditoria {
     @Size(min = IP_ATUALIZACAO_TAMANHO_MINIMO, max = IP_ATUALIZACAO_TAMANHO_MAXIMO, message = IP_ATUALIZACAO_MENSAGEM_TAMANHO)
     @Pattern(regexp = IP_REGEX, message = IP_ATUALIZACAO_MENSAGEM_INVALIDO)
 	private String ipUltimaAtualizacao;
-
-    
+  
 	@Override
 	public String toString() {
 	    return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);

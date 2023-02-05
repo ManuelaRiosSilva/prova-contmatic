@@ -109,8 +109,6 @@ public class EmpresaTest {
     @DisplayName("😀 Teste de empresa válida")
     void deve_aceitar_uma_empresa_valida() {
         Set<String> erros = getErros(empresa);
-        System.out.println(erros);
-        System.out.println(empresa);
         assertThat(erros.size(), is(0));
     }
     

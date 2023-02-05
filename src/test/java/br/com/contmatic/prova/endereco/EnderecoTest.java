@@ -28,6 +28,7 @@ import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGE
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_TAMANHO;
@@ -91,7 +92,6 @@ public class EnderecoTest {
     @DisplayName("😀 Teste de Endereço válido")
     void deve_aceitar_um_endereco_valido() {
         Set<String> erros = getErros(endereco);
-        System.out.println(erros);
         assertThat(erros.size(), is(0));
     }
 
@@ -354,6 +354,13 @@ public class EnderecoTest {
     void nao_deve_aceitar_uma_uf_com_caractere_especial() {
         endereco.setUf("$P");
         assertThat(getErros(endereco), hasItem(UF_MENSAGEM_CARACTERE_ESPECIAL));
+    }
+    
+    @Test
+    @DisplayName("😢 Teste de inválida")
+    void nao_deve_aceitar_uma_uf_invalida() {
+        endereco.setUf("ZZ");
+        assertThat(getErros(endereco), hasItem(UF_MENSAGEM_INVALIDO));
     }
 
     @Test
