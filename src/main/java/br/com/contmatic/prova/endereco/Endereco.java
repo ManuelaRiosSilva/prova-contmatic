@@ -49,8 +49,6 @@ import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_TAMANHO_FIX
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_NUMEROS;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
@@ -58,6 +56,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import br.com.contmatic.prova.util.validacao.Space;
 import br.com.contmatic.prova.util.validacao.Uf;
@@ -124,12 +125,29 @@ public class Endereco {
 
 	@Override
 	public int hashCode() {
-	    return reflectionHashCode(cep, numero);
+	    return new HashCodeBuilder()
+	            .append(this.cep)
+	            .append(this.numero)
+	            .toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-	    return reflectionEquals(this, obj);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        Endereco other = (Endereco) obj;
+        return new EqualsBuilder()
+                .append(this.cep, other.cep)
+                .append(this.numero, other.numero)
+                .isEquals();
 	}
 
 	@Override

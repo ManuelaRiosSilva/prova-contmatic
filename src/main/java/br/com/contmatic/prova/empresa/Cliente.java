@@ -21,8 +21,6 @@ import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.EMAIL_REGEX;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_NUMEROS;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
@@ -33,6 +31,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
@@ -56,8 +56,8 @@ public class Cliente extends Auditoria {
     @NotEmpty(message = NOME_MENSAGEM_VAZIO)
     @Space(message = NOME_MENSAGEM_ESPACO)
     @Size(min = 5, max = 40, message = NOME_MENSAGEM_TAMANHO)
-    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message =  NOME_MENSAGEM_NUMEROS)
-    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = NOME_MENSAGEM_CARACTERE_ESPECIAL) 
+    @Pattern(regexp = REGEX_VALIDAR_NUMEROS, message = NOME_MENSAGEM_NUMEROS)
+    @Pattern(regexp = REGEX_VALIDAR_CARACTERES_ESPECIAIS, message = NOME_MENSAGEM_CARACTERE_ESPECIAL)
     private String nome;
 
     @NotNull(message = EMAIL_MENSAGEM_NULO)
@@ -74,12 +74,23 @@ public class Cliente extends Auditoria {
 
     @Override
     public int hashCode() {
-        return reflectionHashCode(cpf);
+        return new HashCodeBuilder().append(this.cpf).toHashCode();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return reflectionEquals(this, obj);
+    public boolean equals(Object obj) {        
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        Cliente other = (Cliente) obj;
+        return new EqualsBuilder().append(this.cpf, other.cpf).isEquals();
     }
 
     @Override

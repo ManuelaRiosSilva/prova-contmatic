@@ -46,7 +46,7 @@ import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 import br.com.contmatic.prova.util.validacao.Space;
 import lombok.Getter;
@@ -74,11 +74,11 @@ public abstract class Auditoria {
 
     @NotNull(message = DATA_CRIACAO_MENSAGEM_NULO)
     @Past(message = DATA_CRIACAO_MAXIMA_MENSAGEM)
-	private DateTime dataCriacao;
+	private LocalDateTime dataCriacao;
 
     @NotNull(message = DATA_ATUALIZACAO_MENSAGEM_NULO)
     @Past(message = DATA_ATUALIZACAO_MAXIMA_MENSAGEM) 
-	private DateTime ultimaAtualizacao;
+	private LocalDateTime ultimaAtualizacao;
 
     @NotNull(message = IP_CRIACAO_MENSAGEM_NULO)
     @NotEmpty(message = IP_CRIACAO_MENSAGEM_VAZIO)

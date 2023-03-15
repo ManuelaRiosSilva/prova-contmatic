@@ -50,8 +50,6 @@ import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_TAMAN
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_NUMEROS;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 import static org.apache.commons.lang3.builder.ToStringBuilder.reflectionToString;
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
@@ -64,8 +62,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.br.CPF;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.util.validacao.Age;
@@ -119,7 +119,7 @@ public class Funcionario extends Auditoria{
 
     @NotNull(message = DATA_NASCIMENTO_MENSAGEM_NULO)
     @Age(message = DATA_NASCIMENTO_MENSAGEM)
-	private DateTime dataNascimento;
+	private LocalDate dataNascimento;
 
 	@NotNull(message = SALARIO_MENSAGEM_NULO)
 	@DecimalMin(value = SALARIO_MINIMO, message = SALARIO_MINIMO_MENSAGEM)
@@ -136,12 +136,23 @@ public class Funcionario extends Auditoria{
 
 	@Override
 	public int hashCode() {
-        return reflectionHashCode(matricula);
+        return new HashCodeBuilder().append(this.matricula).toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-        return reflectionEquals(this, obj);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        Funcionario other = (Funcionario) obj;
+        return new EqualsBuilder().append(this.matricula, other.matricula).isEquals();
 	}
 
 	@Override

@@ -46,6 +46,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class TelefoneTest {
@@ -263,6 +264,14 @@ public class TelefoneTest {
         assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_CARACTERE_ESPECIAL));
     }
 
+    @Test
+    @DisplayName("😀 Teste de Equals")
+    void deve_verificar_a_implementacao_do_equals_com_sucesso() {
+        EqualsVerifier.simple().forClass(Telefone.class)
+        .withOnlyTheseFields("ddi", "ddd", "numero")
+        .verify();
+    }
+    
     @Test
     @DisplayName("😀 Teste de Objetos iguais")
     void deve_retornar_true_no_equals_quando_dois_objetos_forem_iguais() {

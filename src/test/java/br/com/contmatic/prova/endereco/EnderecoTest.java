@@ -60,6 +60,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import br.com.contmatic.prova.constantes.EnderecoConstante;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class EnderecoTest {
@@ -357,12 +358,20 @@ public class EnderecoTest {
     }
     
     @Test
-    @DisplayName("😢 Teste de inválida")
+    @DisplayName("😢 Teste de UF inválida")
     void nao_deve_aceitar_uma_uf_invalida() {
         endereco.setUf("ZZ");
         assertThat(getErros(endereco), hasItem(UF_MENSAGEM_INVALIDO));
     }
 
+    @Test
+    @DisplayName("😀 Teste de Equals")
+    void deve_verificar_a_implementacao_do_equals_com_sucesso() {
+        EqualsVerifier.simple().forClass(Endereco.class)
+        .withOnlyTheseFields("cep", "numero")
+        .verify();
+    }
+    
     @Test
     @DisplayName("😀 Teste de Objetos iguais")
     void deve_retornar_true_no_equals_quando_dois_objetos_forem_iguais() {

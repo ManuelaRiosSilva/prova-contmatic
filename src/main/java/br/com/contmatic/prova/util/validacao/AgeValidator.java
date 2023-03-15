@@ -3,16 +3,19 @@ package br.com.contmatic.prova.util.validacao;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.Period;
 
-public class AgeValidator implements ConstraintValidator<Age, DateTime> {
+public class AgeValidator implements ConstraintValidator<Age, LocalDate> {
 
     @Override
-    public boolean isValid(DateTime value, ConstraintValidatorContext context) {
-        Period period = new Period(value, DateTime.now());
+    public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
+        if (value == null) {
+            return false;
+        }
+        Period period = new Period(value, LocalDate.now());
         Integer anos = period.getYears();
-        return anos != null && anos > 18 && anos < 70;
+        return anos != null && anos >= 18 && anos <= 70;
     }
-
 }
+

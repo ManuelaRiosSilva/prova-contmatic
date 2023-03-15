@@ -2,7 +2,8 @@ package br.com.contmatic.prova.util;
 
 import java.math.BigDecimal;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import br.com.contmatic.prova.empresa.Cliente;
 import br.com.contmatic.prova.empresa.Empresa;
@@ -16,8 +17,8 @@ import br.com.six2six.fixturefactory.loader.TemplateLoader;
 public class FixtureFactory implements TemplateLoader {
     @Override
     public void load() {
-        DateTime criacao = new DateTime(2022, 01, 01, 15, 8, 0, 0);
-        DateTime atualizacao = DateTime.now();
+        LocalDateTime criacao = new LocalDateTime(2022, 01, 01, 15, 8);
+        LocalDateTime atualizacao = LocalDateTime.now();
         Fixture.of(Cliente.class).addTemplate("válido", new Rule() {
             {
                 add("cpf", random("49523197843", "87147963091"));
@@ -32,7 +33,7 @@ public class FixtureFactory implements TemplateLoader {
             }
         });
         
-        DateTime abertura = new DateTime(2021, 12, 19, 15, 8, 0, 0);
+        LocalDate abertura = new LocalDate(2021, 12, 19);
         Fixture.of(Empresa.class).addTemplate("válido", new Rule() {
             {
                 add("cnpj", random("05823382000177", "92754738000162"));
@@ -50,7 +51,7 @@ public class FixtureFactory implements TemplateLoader {
             }
         });
         
-        DateTime nascimento = new DateTime(2003, 7, 5, 0, 0, 0, 0);
+        LocalDate nascimento = new LocalDate(2003, 7, 5);
         BigDecimal salario1 = new BigDecimal(2500);
         BigDecimal salario2 = new BigDecimal(1500);
         Fixture.of(Funcionario.class).addTemplate("válido", new Rule() {

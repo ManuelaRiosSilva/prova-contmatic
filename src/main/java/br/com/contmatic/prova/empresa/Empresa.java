@@ -33,8 +33,6 @@ import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TA
 import static br.com.contmatic.prova.constantes.EmpresaConstante.RAZAO_SOCIAL_TAMANHO_MINIMO;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_CARACTERES_ESPECIAIS;
 import static br.com.contmatic.prova.util.validacao.ValidacaoUtil.REGEX_VALIDAR_LETRAS;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
 import java.util.Set;
 
@@ -45,9 +43,11 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.hibernate.validator.constraints.br.CNPJ;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 
 import br.com.contmatic.prova.auditoria.Auditoria;
 import br.com.contmatic.prova.endereco.Endereco;
@@ -93,7 +93,7 @@ public class Empresa extends Auditoria {
  
     @NotNull(message = DATA_ABERTURA_MENSAGEM_NULO)
     @Past (message = DATA_ABERTURA_MAXIMA_MENSAGEM)
-	private DateTime dataAbertura;
+	private LocalDate dataAbertura;
 
 	public Empresa(String cnpj) {
 		this.setCnpj(cnpj);
@@ -101,12 +101,23 @@ public class Empresa extends Auditoria {
 
     @Override
 	public int hashCode() {
-	    return reflectionHashCode(cnpj);
+        return new HashCodeBuilder().append(this.cnpj).toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-	    return reflectionEquals(this, obj);
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        Empresa other = (Empresa) obj;
+        return new EqualsBuilder().append(this.cnpj, other.cnpj).isEquals();
 	}
 
 	@Override

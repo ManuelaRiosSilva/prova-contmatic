@@ -61,12 +61,12 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.hamcrest.Matchers;
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
@@ -78,6 +78,7 @@ import br.com.contmatic.prova.endereco.Endereco;
 import br.com.contmatic.prova.telefone.Telefone;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
+import nl.jqno.equalsverifier.EqualsVerifier;
 
 @TestMethodOrder(MethodOrderer.MethodName.class)
 public class EmpresaTest {
@@ -361,11 +362,19 @@ public class EmpresaTest {
     @Test
     @DisplayName("😢 Teste de Data de Abertura maior que a data atual")
     void nao_deve_aceitar_uma_data_de_abertura_maior_que_a_data_atual() {
-        DateTime dataMaxima = new DateTime(2027, 12, 19, 15, 8, 0, 0);
+        LocalDate dataMaxima = new LocalDate(2027, 12, 19);
         empresa.setDataAbertura(dataMaxima);
         assertThat(getErros(empresa), hasItem(DATA_ABERTURA_MAXIMA_MENSAGEM));
     }
 
+    @Test
+    @DisplayName("😀 Teste de Equals")
+    void deve_verificar_a_implementacao_do_equals_com_sucesso() {
+        EqualsVerifier.simple().forClass(Empresa.class)
+        .withOnlyTheseFields("cnpj")
+        .verify();
+    }
+    
     @Test
     @DisplayName("😀 Teste de Objetos iguais")
     void deve_retornar_true_no_equals_quando_dois_objetos_forem_iguais() {
@@ -418,7 +427,7 @@ public class EmpresaTest {
         final String cnpj = "05823382000177";
         final String nomeFantasia = "Renner";
         final String razaoSocial = "Renner S.A";
-        final DateTime dataAbertura = new DateTime(2022, 12, 19, 15, 8, 0, 0);
+        final LocalDate dataAbertura = new LocalDate(2022, 12, 19);
         Empresa empresa1 = new Empresa(cnpj);
         empresa1.setNomeFantasia(nomeFantasia);
         empresa1.setRazaoSocial(razaoSocial);
@@ -500,14 +509,6 @@ public class EmpresaTest {
         assertThat(getErros(empresa), hasItem(ATUALIZADO_POR_MENSAGEM_ESPACO));
     }
 
-    @Disabled("Desabilitado por ser um teste duplicado")
-    @Test
-    @DisplayName("😢 Teste de Atualizado Por com espaço")
-    void nao_deve_aceitar_um_atualizador_com_sem_nada() {
-        empresa.setAtualizadoPor("	");
-        assertThat(getErros(empresa), hasItem(ATUALIZADO_POR_MENSAGEM_ESPACO));
-    }
-
     @Test
     @Timeout(3)
     @DisplayName("😢 Teste de Atualizado Por com menos de 3 caracteres")
@@ -548,7 +549,7 @@ public class EmpresaTest {
     @Test
     @DisplayName("😢 Teste de Data de Criação maior que a data atual")
     void nao_deve_aceitar_uma_data_de_criacao_maior_que_a_data_atual() {
-        DateTime dataMaxima = new DateTime(2023, 12, 19, 15, 8, 0, 0);
+        LocalDateTime dataMaxima = new LocalDateTime(2023, 12, 19, 15, 8);
         empresa.setDataCriacao(dataMaxima);
         assertThat(getErros(empresa), hasItem(DATA_CRIACAO_MAXIMA_MENSAGEM));
     }
@@ -563,7 +564,7 @@ public class EmpresaTest {
     @Test
     @DisplayName("😢 Teste de Data de Atualização maior que a data atual")
     void nao_deve_aceitar_uma_data_de_atualizacao_depois_da_data_atual() {
-        DateTime dataMaxima = new DateTime(2027, 12, 19, 15, 8, 0, 0);
+        LocalDateTime dataMaxima = new LocalDateTime(2027, 12, 19, 15, 8);
         empresa.setUltimaAtualizacao(dataMaxima);
         assertThat(getErros(empresa), hasItem(DATA_ATUALIZACAO_MAXIMA_MENSAGEM));
     }
@@ -657,8 +658,8 @@ public class EmpresaTest {
     void deve_retornar_true_se_o_objeto_for_igual_ao_tostring_auditoria() {
         final String criadoPor = "Manu";
         final String atualizadoPor = "Leonardo";
-        final DateTime dataCriacao = new DateTime(2022, 12, 19, 15, 8, 0, 0);
-        final DateTime ultimaAtualizacao = new DateTime(2022, 12, 19, 15, 8, 0, 0);
+        final LocalDateTime dataCriacao = new LocalDateTime(2022, 12, 19, 15, 8);
+        final LocalDateTime ultimaAtualizacao = new LocalDateTime(2022, 12, 19, 15, 8);
         final String ipCriacao = "127.0.0.1";
         final String ipUltimaAtualizacao = "127.0.0.1";
         Empresa empresa1 = new Empresa("05823382000177");
