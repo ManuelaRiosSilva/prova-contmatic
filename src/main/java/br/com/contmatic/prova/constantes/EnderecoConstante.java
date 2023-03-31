@@ -2,25 +2,25 @@ package br.com.contmatic.prova.constantes;
 
 public final class EnderecoConstante {
 
-	public static final int CEP_TAMANHO_FIXO = 8;
+	public static final int CEP_TAMANHO_FIXO_8 = 8;
 			
-	public static final int NUMERO_TAMANHO_MINIMO = 1;
+	public static final int NUMERO_TAMANHO_MINIMO_1 = 1;
 	
-	public static final int NUMERO_TAMANHO_MAXIMO = 4;
+	public static final int NUMERO_TAMANHO_MAXIMO_4 = 4;
 	
-	public static final int LOGRADOURO_TAMANHO_MINIMO = 3;
+	public static final int LOGRADOURO_TAMANHO_MINIMO_3 = 3;
 	
-	public static final int LOGRADOURO_TAMANHO_MAXIMO = 60;
+	public static final int LOGRADOURO_TAMANHO_MAXIMO_60 = 60;
 	
-	public static final int BAIRRO_TAMANHO_MINIMO = 3;
+	public static final int BAIRRO_TAMANHO_MINIMO_3 = 3;
 	
-	public static final int BAIRRO_TAMANHO_MAXIMO = 30;
+	public static final int BAIRRO_TAMANHO_MAXIMO_30 = 30;
 	
-	public static final int CIDADE_TAMANHO_MINIMO = 3;
+	public static final int CIDADE_TAMANHO_MINIMO_3 = 3;
 	
-	public static final int CIDADE_TAMANHO_MAXIMO = 20;
+	public static final int CIDADE_TAMANHO_MAXIMO_20 = 20;
 	
-	public static final int UF_TAMANHO_FIXO = 2;
+	public static final int UF_TAMANHO_FIXO_2 = 2;
 	
 	public static final String CEP_MENSAGEM_TAMANHO = "O campo CEP do Endereço deve conter 8 dígitos.";
 	

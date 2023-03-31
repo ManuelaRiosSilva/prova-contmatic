@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -104,8 +105,10 @@ public class ClienteTest {
     @Test
     @DisplayName("😢 Teste de CPF nulo")
     void nao_deve_aceitar_um_cpf_nulo() {
-        cliente.setCpf(null);
-        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            cliente.setCpf(null);
+        });
+        assertEquals("cpf is marked non-null but is null", thrown.getMessage());
     }
 
     @Test

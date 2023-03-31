@@ -2,21 +2,21 @@ package br.com.contmatic.prova.constantes;
 
 public final class AuditoriaConstante {
 	
-	public static final int CRIADO_POR_TAMANHO_MINIMO = 3;
+	public static final int CRIADO_POR_TAMANHO_MINIMO_3 = 3;
 	
-	public static final int CRIADO_POR_TAMANHO_MAXIMO = 40;
+	public static final int CRIADO_POR_TAMANHO_MAXIMO_40 = 40;
 	
-	public static final int ATUALIZADO_POR_TAMANHO_MINIMO = 3;
+	public static final int ATUALIZADO_POR_TAMANHO_MINIMO_3 = 3;
 	
-	public static final int ATUALIZADO_POR_TAMANHO_MAXIMO = 40;
+	public static final int ATUALIZADO_POR_TAMANHO_MAXIMO_40 = 40;
 	
-	public static final int IP_CRIACAO_TAMANHO_MINIMO = 7;
+	public static final int IP_CRIACAO_TAMANHO_MINIMO_7 = 7;
 	
-	public static final int IP_CRIACAO_TAMANHO_MAXIMO = 14;
+	public static final int IP_CRIACAO_TAMANHO_MAXIMO_14 = 14;
 	
-	public static final int IP_ATUALIZACAO_TAMANHO_MINIMO = 7;
+	public static final int IP_ATUALIZACAO_TAMANHO_MINIMO_7 = 7;
 	
-	public static final int IP_ATUALIZACAO_TAMANHO_MAXIMO = 14;
+	public static final int IP_ATUALIZACAO_TAMANHO_MAXIMO_14 = 14;
 	
 	public static final String CRIADOR_POR_MENSAGEM_NULO = "O campo Criado Por é obrigatório.";
 	

@@ -11,6 +11,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
+/**
+ * Valida se uma String é composta apenas de um único espaço vazio
+ * 
+ * @author Manuela Rios
+ * @param Mensagem de erro em caso de falha
+ */
 @Target({FIELD, PARAMETER})
 @Retention(RUNTIME)
 @Inherited

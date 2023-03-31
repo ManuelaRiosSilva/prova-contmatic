@@ -10,7 +10,17 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-
+/**
+ * Valida se a UF inserida é válida.
+ *<p>
+ *Retorna falso caso a UF não exista ou não pertença ao Brasil.
+ *<p>
+ *O atributo anotado deve ser do tipo String. 
+ *<p>
+ *@author Manuela Rios
+ *@param Classe que contém todas as UF brasileiras
+ *@param Mensagem de erro em caso de falha
+ */
  @Retention(RUNTIME)
  @Target({ FIELD, PARAMETER })
  @Constraint(validatedBy = { UfValidator.class })

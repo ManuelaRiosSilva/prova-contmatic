@@ -2,13 +2,13 @@ package br.com.contmatic.prova.constantes;
 
 public final class TelefoneConstante {
 	
-	public static final int DDI_TAMANHO_FIXO = 2;
+	public static final int DDI_TAMANHO_FIXO_2 = 2;
 	
-	public static final int DDD_TAMANHO_FIXO = 2;
+	public static final int DDD_TAMANHO_FIXO_2 = 2;
 	
-	public static final int NUMERO_TAMANHO_MINIMO = 8;
+	public static final int NUMERO_TAMANHO_MINIMO_8 = 8;
 	
-	public static final int NUMERO_TAMANHO_MAXIMO = 9;
+	public static final int NUMERO_TAMANHO_MAXIMO_9 = 9;
 	
 	public static final String DDI_MENSAGEM_TAMANHO = "O campo DDI do Telefone deve conter 2 dígitos.";
 	

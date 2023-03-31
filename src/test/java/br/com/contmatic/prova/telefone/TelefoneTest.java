@@ -3,21 +3,18 @@ package br.com.contmatic.prova.telefone;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_LETRAS;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_TERMINADO_EM_0;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_LETRAS;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_VALOR_INVALIDO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_LETRAS;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.util.Violations.getErros;
@@ -26,6 +23,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -113,8 +111,10 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de DDI nulo")
     void nao_deve_aceitar_um_ddi_nulo() {
-        telefone.setDdi(null);
-        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            telefone.setDdi(null);
+        });
+        assertEquals("ddi is marked non-null but is null", thrown.getMessage());
     }
 
     @Test
@@ -176,8 +176,10 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de DDD nulo")
     void nao_deve_aceitar_um_ddd_nulo() {
-        telefone.setDdd(null);
-        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            telefone.setDdd(null);
+        });
+        assertEquals("ddd is marked non-null but is null", thrown.getMessage());
     }
 
     @Test
@@ -232,8 +234,10 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de Número de Telefone nulo")
     void nao_deve_aceitar_um_telefone_nulo() {
-        telefone.setNumero(null);
-        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            telefone.setNumero(null);
+        });
+        assertEquals("numero is marked non-null but is null", thrown.getMessage());
     }
 
     @Test

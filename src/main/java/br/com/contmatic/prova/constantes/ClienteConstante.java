@@ -2,15 +2,15 @@ package br.com.contmatic.prova.constantes;
 
 public final class ClienteConstante {
     
-    public static final int CPF_TAMANHO_FIXO = 11;
+    public static final int CPF_TAMANHO_FIXO_11 = 11;
 	
-	public static final int NOME_TAMANHO_MINIMO = 5;
+	public static final int NOME_TAMANHO_MINIMO_5 = 5;
 	
-	public static final int NOME_TAMANHO_MAXIMO = 40;
+	public static final int NOME_TAMANHO_MAXIMO_40 = 40;
 	
-	public static final int EMAIL_TAMANHO_MINIMO = 18;
+	public static final int EMAIL_TAMANHO_MINIMO_18 = 18;
 	
-	public static final int EMAIL_TAMANHO_MAXIMO = 40;
+	public static final int EMAIL_TAMANHO_MAXIMO_40 = 40;
 	
 	public static final String NOME_DA_CLASSE = "Cliente";
 

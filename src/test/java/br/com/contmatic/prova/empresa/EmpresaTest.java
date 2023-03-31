@@ -54,13 +54,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import org.hamcrest.Matchers;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.junit.jupiter.api.AfterAll;
@@ -158,8 +158,10 @@ public class EmpresaTest {
     @Test
     @DisplayName("😢 Teste de CNPJ nulo")
     void nao_deve_aceitar_um_cnpj_nulo() {
-        empresa.setCnpj(null);
-        assertThat(getErros(empresa), Matchers.hasItem(EmpresaConstante.CNPJ_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            empresa.setCnpj(null);
+        });
+        assertEquals("cnpj is marked non-null but is null", thrown.getMessage());
     }
 
     @Test

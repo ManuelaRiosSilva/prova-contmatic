@@ -7,7 +7,6 @@ import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGE
 import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_CARACTERE_ESPECIAL;
@@ -23,7 +22,6 @@ import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MEN
 import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERE_ESPECIAL;
@@ -39,6 +37,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -113,8 +112,10 @@ public class EnderecoTest {
     @Test
     @DisplayName("😢 Teste de CEP nulo")
     void nao_deve_aceitar_um_cep_nulo() {
-        endereco.setCep(null);
-        assertThat(getErros(endereco), hasItem(CEP_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            endereco.setCep(null);
+        });
+        assertEquals("cep is marked non-null but is null", thrown.getMessage());
     }
 
     @Test
@@ -154,8 +155,10 @@ public class EnderecoTest {
     @Test
     @DisplayName("😢 Teste de Número nulo")
     void nao_deve_aceitar_um_numero_nulo() {
-        endereco.setNumero(null);
-        assertThat(getErros(endereco), hasItem(NUMERO_MENSAGEM_NULO));
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            endereco.setNumero(null);
+        });
+        assertEquals("numero is marked non-null but is null", thrown.getMessage());
     }
 
     @Test
@@ -363,7 +366,7 @@ public class EnderecoTest {
         endereco.setUf("ZZ");
         assertThat(getErros(endereco), hasItem(UF_MENSAGEM_INVALIDO));
     }
-
+    
     @Test
     @DisplayName("😀 Teste de Equals")
     void deve_verificar_a_implementacao_do_equals_com_sucesso() {
@@ -371,7 +374,7 @@ public class EnderecoTest {
         .withOnlyTheseFields("cep", "numero")
         .verify();
     }
-    
+        
     @Test
     @DisplayName("😀 Teste de Objetos iguais")
     void deve_retornar_true_no_equals_quando_dois_objetos_forem_iguais() {
@@ -392,7 +395,7 @@ public class EnderecoTest {
     }
 
     static Stream<Arguments> cepNumeroProvider() {
-        return Stream.of(arguments("07500000", "1234"), arguments("07176600", "1204"));
+        return Stream.of(arguments("07500000", "1234"), arguments("07176600", "1204"), arguments("12376123", "0456"));
     }
 
     @ParameterizedTest
@@ -402,6 +405,9 @@ public class EnderecoTest {
         Endereco endereco1 = new Endereco("07500000", "1204");
         Endereco endereco2 = new Endereco(cep, numero);
         assertNotEquals(endereco1, endereco2);
+        
+        System.out.println(cep);
+        System.out.println(numero);
     }
 
     @Test
@@ -442,7 +448,7 @@ public class EnderecoTest {
         Endereco endereco1 = new Endereco(cep, numero);
         Endereco endereco2 = new Endereco(cep2, numero);
         assertNotEquals(endereco1.hashCode(), endereco2.hashCode());
-    }
+    }    
 
     @Test
     @DisplayName("😀 Teste de Objeto igual ao toString")

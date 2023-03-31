@@ -19,7 +19,6 @@ import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIM
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_LETRAS;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_CARACTERE_ESPECIAL;
@@ -43,6 +42,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -112,8 +112,10 @@ public class FuncionarioTest {
 	@Test
 	@DisplayName("😢 Teste de Matrícula nula")
 	void nao_deve_aceitar_uma_matricula_nula() {
-		funcionario.setMatricula(null);
-	      assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_NULO));   
+        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
+            funcionario.setMatricula(null);
+        });
+        assertEquals("matricula is marked non-null but is null", thrown.getMessage());
 	}
 	
 	@Test

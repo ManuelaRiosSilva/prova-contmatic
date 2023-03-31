@@ -2,23 +2,23 @@ package br.com.contmatic.prova.constantes;
 
 public final class EmpresaConstante {
 	
-    public static final int CNPJ_TAMANHO_FIXO = 14;
+    public static final int CNPJ_TAMANHO_FIXO_14 = 14;
     
-	public static final int NOME_FANTASIA_TAMANHO_MINIMO = 5;
+	public static final int NOME_FANTASIA_TAMANHO_MINIMO_5 = 5;
 	
-	public static final int NOME_FANTASIA_TAMANHO_MAXIMO = 35;
+	public static final int NOME_FANTASIA_TAMANHO_MAXIMO_35 = 35;
 	
-	public static final int RAZAO_SOCIAL_TAMANHO_MINIMO = 5;
+	public static final int RAZAO_SOCIAL_TAMANHO_MINIMO_5 = 5;
 	
-	public static final int RAZAO_SOCIAL_TAMANHO_MAXIMO = 50;
+	public static final int RAZAO_SOCIAL_TAMANHO_MAXIMO_50 = 50;
 	
-	public static final int LISTA_ENDERECOS_TAMANHO_MINIMO = 1;
+	public static final int LISTA_ENDERECOS_TAMANHO_MINIMO_1 = 1;
 	
-	public static final int LISTA_ENDERECOS_TAMANHO_MAXIMO = 5;
+	public static final int LISTA_ENDERECOS_TAMANHO_MAXIMO_5 = 5;
 	
-	public static final int LISTA_TELEFONES_TAMANHO_MINIMO = 1;
+	public static final int LISTA_TELEFONES_TAMANHO_MINIMO_1 = 1;
 	
-	public static final int LISTA_TELEFONES_TAMANHO_MAXIMO = 5;
+	public static final int LISTA_TELEFONES_TAMANHO_MAXIMO_5 = 5;
 	
 	public static final String CNPJ_MENSAGEM_TAMANHO = "O campo CNPJ da Empresa deve conter 14 dígitos.";
 	

@@ -2,25 +2,25 @@ package br.com.contmatic.prova.constantes;
 
 public final class FuncionarioConstante {
 	
-    public static final int CPF_TAMANHO_FIXO = 11;
+    public static final int CPF_TAMANHO_FIXO_11 = 11;
     
-	public static final int MATRICULA_TAMANHO_FIXO = 5;
+	public static final int MATRICULA_TAMANHO_FIXO_5 = 5;
 	
-	public static final int NOME_TAMANHO_MINIMO = 5;
+	public static final int NOME_TAMANHO_MINIMO_5 = 5;
 	
-	public static final int NOME_TAMANHO_MAXIMO = 40;
+	public static final int NOME_TAMANHO_MAXIMO_40 = 40;
 	
-	public static final int CARGO_TAMANHO_MINIMO = 5;
+	public static final int CARGO_TAMANHO_MINIMO_5 = 5;
 	
-	public static final int CARGO_TAMANHO_MAXIMO = 25;
+	public static final int CARGO_TAMANHO_MAXIMO_25 = 25;
 	
-	public static final int SETOR_TAMANHO_MINIMO = 2;
+	public static final int SETOR_TAMANHO_MINIMO_2 = 2;
 	
-	public static final int SETOR_TAMANHO_MAXIMO = 20;
+	public static final int SETOR_TAMANHO_MAXIMO_20 = 20;
 	
-	public static final String SALARIO_MINIMO = "1212";
+	public static final String SALARIO_MINIMO_1212 = "1212";
 	
-	public static final String SALARIO_MAXIMO = "15000";
+	public static final String SALARIO_MAXIMO_15000 = "15000";
 	
 	public static final String MATRICULA_MENSAGEM_TAMANHO = "O campo Matrícula do Funcionário deve conter 5 dígitos.";
 	
