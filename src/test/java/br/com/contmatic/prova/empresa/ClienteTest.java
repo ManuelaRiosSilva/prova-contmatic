@@ -1,9 +1,8 @@
 package br.com.contmatic.prova.empresa;
 
-import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_INVALIDO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_LETRAS;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.CPF_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_ESPACO;
@@ -11,10 +10,9 @@ import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.EMAIL_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.ClienteConstante.NOME_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.util.Violations.getErros;
@@ -23,7 +21,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
@@ -105,10 +102,8 @@ public class ClienteTest {
     @Test
     @DisplayName("😢 Teste de CPF nulo")
     void nao_deve_aceitar_um_cpf_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            cliente.setCpf(null);
-        });
-        assertEquals("cpf is marked non-null but is null", thrown.getMessage());
+        cliente.setCpf(null);
+        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_NULO));
     }
 
     @Test
@@ -129,14 +124,14 @@ public class ClienteTest {
     @DisplayName("😢 Teste de CPF com letras")
     void nao_deve_aceitar_um_cpf_com_letras() {
         cliente.setCpf("4952319784A");
-        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_LETRAS));
+        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de CPF com caracteres especiais")
     void nao_deve_aceitar_um_cpf_com_caracteres_especiais() {
         cliente.setCpf("4952319784!");
-        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(cliente), hasItem(CPF_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -185,14 +180,14 @@ public class ClienteTest {
     @DisplayName("😢 Teste de Nome com números")
     void nao_deve_aceitar_um_nome_com_numeros() {
         cliente.setNome("M4nu314 R105");
-        assertThat(getErros(cliente), hasItem(NOME_MENSAGEM_NUMEROS));
+        assertThat(getErros(cliente), hasItem(NOME_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de Nome com caracteres especiais")
     void nao_deve_aceitar_um_nome_com_caracteres_especiais() {
         cliente.setNome("M@nuela");
-        assertThat(getErros(cliente), hasItem(NOME_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(cliente), hasItem(NOME_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test

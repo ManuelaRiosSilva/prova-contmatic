@@ -3,13 +3,13 @@ package br.com.contmatic.prova.empresa;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.ATUALIZADO_POR_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADOR_POR_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_CARACTERE_ESPECIAL;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_NUMEROS;
+import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.CRIADO_POR_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.DATA_ATUALIZACAO_MAXIMA_MENSAGEM;
@@ -26,10 +26,10 @@ import static br.com.contmatic.prova.constantes.AuditoriaConstante.IP_CRIACAO_ME
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.IP_CRIACAO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.IP_CRIACAO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.AuditoriaConstante.IP_CRIACAO_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_INVALIDO;
-import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.CNPJ_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MAXIMA_MENSAGEM;
 import static br.com.contmatic.prova.constantes.EmpresaConstante.DATA_ABERTURA_MENSAGEM_NULO;
@@ -54,12 +54,13 @@ import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -72,6 +73,9 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import br.com.contmatic.prova.constantes.EmpresaConstante;
 import br.com.contmatic.prova.endereco.Endereco;
@@ -145,23 +149,21 @@ public class EmpresaTest {
     @DisplayName("😢 Teste de CNPJ com caracteres especiais")
     void nao_deve_aceitar_um_cnpj_com_caracteres_especiais() {
         empresa.setCnpj("9431860000014@");
-        assertThat(getErros(empresa), hasItem(CNPJ_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(empresa), hasItem(CNPJ_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de CNPJ com letras")
     void nao_deve_aceitar_um_cnpj_com_letras() {
         empresa.setCnpj("AAAAAAAAAAAAAA");
-        assertThat(getErros(empresa), hasItem(CNPJ_MENSAGEM_LETRAS));
+        assertThat(getErros(empresa), hasItem(CNPJ_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de CNPJ nulo")
     void nao_deve_aceitar_um_cnpj_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            empresa.setCnpj(null);
-        });
-        assertEquals("cnpj is marked non-null but is null", thrown.getMessage());
+        empresa.setCnpj(null);
+        assertThat(getErros(empresa), hasItem(CNPJ_MENSAGEM_NULO));
     }
 
     @Test
@@ -480,7 +482,7 @@ public class EmpresaTest {
     @DisplayName("😢 Teste de Criado Por com números")
     void nao_deve_aceitar_um_criador_com_numeros() {
         empresa.setCriadoPor("M4nuela");
-        assertThat(getErros(empresa), hasItem(CRIADO_POR_MENSAGEM_NUMEROS));
+        assertThat(getErros(empresa), hasItem(CRIADO_POR_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -531,7 +533,7 @@ public class EmpresaTest {
     @DisplayName("😢 Teste de Atualizado Por com números")
     void nao_deve_aceitar_um_atualizador_com_numeros() {
         empresa.setAtualizadoPor("M4nuela");
-        assertThat(getErros(empresa), hasItem(ATUALIZADO_POR_MENSAGEM_NUMEROS));
+        assertThat(getErros(empresa), hasItem(ATUALIZADO_POR_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -607,13 +609,6 @@ public class EmpresaTest {
     }
 
     @Test
-    @DisplayName("😢 Teste de IP de Criação inválido")
-    void nao_deve_aceitar_um_ip_de_criacao_invalido() {
-        empresa.setIpCriacao("127.0.00");
-        assertThat(getErros(empresa), hasItem(IP_CRIACAO_MENSAGEM_INVALIDO));
-    }
-
-    @Test
     @DisplayName("😢 Teste de IP de Atualização nulo")
     void nao_deve_aceitar_um_ip_de_atualizacao_nulo() {
         empresa.setIpUltimaAtualizacao(null);
@@ -647,14 +642,27 @@ public class EmpresaTest {
         empresa.setIpUltimaAtualizacao("101.102.103.104");
         assertThat(getErros(empresa), hasItem(IP_ATUALIZACAO_MENSAGEM_TAMANHO));
     }
-
-    @Test
-    @DisplayName("😢 Teste de IP de Atualização inválido")
-    void nao_deve_aceitar_um_ip_de_atualizacao_invalido() {
-        empresa.setIpUltimaAtualizacao("127.0.00");
-        assertThat(getErros(empresa), hasItem(IP_ATUALIZACAO_MENSAGEM_INVALIDO));
+    
+    static Stream<Arguments> ipProvider(){
+        return Stream.of(arguments("127.0.00"), arguments("127.125.A"), arguments("0@.102.103.104"));
     }
 
+    @DisplayName("😢 Teste de IP de Atualização inválido")
+    @MethodSource("ipProvider")
+    @ParameterizedTest
+    void nao_deve_aceitar_um_ip_de_atualizacao_invalido(String ip) {
+        empresa.setIpUltimaAtualizacao(ip);
+        assertThat(getErros(empresa), hasItem(IP_ATUALIZACAO_MENSAGEM_INVALIDO));
+    }
+    
+    @DisplayName("😢 Teste de IP de Criação inválido")
+    @MethodSource("ipProvider")
+    @ParameterizedTest
+    void nao_deve_aceitar_um_ip_de_criacao_invalido(String ip) {
+        empresa.setIpCriacao(ip);
+        assertThat(getErros(empresa), hasItem(IP_CRIACAO_MENSAGEM_INVALIDO));
+    }
+        
     @Test
     @DisplayName("😀 Teste de Objeto igual ao toString - Auditoria")
     void deve_retornar_true_se_o_objeto_for_igual_ao_tostring_auditoria() {

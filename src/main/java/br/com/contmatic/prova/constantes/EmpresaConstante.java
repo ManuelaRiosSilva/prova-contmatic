@@ -28,10 +28,8 @@ public final class EmpresaConstante {
 	
 	public static final String CNPJ_MENSAGEM_ESPACO = "O campo CNPJ da Empresa precisa ser válido.";
 	
-	public static final String CNPJ_MENSAGEM_LETRAS = "O campo CNPJ da Empresa deve conter somente números.";
-	
-	public static final String CNPJ_MENSAGEM_CARACTERE_ESPECIAL = "O campo CNPJ da Empresa deve conter somente números.";
-	
+	public static final String CNPJ_MENSAGEM_CARACTERES_INVALIDOS = "O campo CNPJ da Empresa deve conter somente números.";
+		
 	public static final String CNPJ_MENSAGEM_INVALIDO = "O campo CNPJ da Empresa está inválido.";
 	
 	public static final String CNPJ_MENSAGEM_NUMEROS_IGUAIS = "O campo CNPJ da Empresa não pode ter todos os números iguais.";

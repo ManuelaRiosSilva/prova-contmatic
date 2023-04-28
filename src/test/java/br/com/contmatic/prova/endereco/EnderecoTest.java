@@ -1,34 +1,34 @@
 package br.com.contmatic.prova.endereco;
 
-import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.BAIRRO_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CEP_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.CIDADE_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.LOGRADOURO_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_ESPACO;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.NUMERO_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_INVALIDO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.EnderecoConstante.UF_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.util.Violations.getErros;
@@ -37,7 +37,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -112,10 +111,8 @@ public class EnderecoTest {
     @Test
     @DisplayName("😢 Teste de CEP nulo")
     void nao_deve_aceitar_um_cep_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            endereco.setCep(null);
-        });
-        assertEquals("cep is marked non-null but is null", thrown.getMessage());
+        endereco.setCep(null);
+        assertThat(getErros(endereco), hasItem(CEP_MENSAGEM_NULO));  
     }
 
     @Test
@@ -136,14 +133,14 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de CEP com letras")
     void nao_deve_aceitar_um_cep_com_letras() {
         endereco.setCep("0750000O");
-        assertThat(getErros(endereco), hasItem(EnderecoConstante.CEP_MENSAGEM_LETRAS));
+        assertThat(getErros(endereco), hasItem(CEP_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de CEP com caracteres especiais")
     void nao_deve_aceitar_um_cep_com_caracteres_especiais() {
         endereco.setCep("0750000!");
-        assertThat(getErros(endereco), hasItem(CEP_MENSAGEM_CARACTERE_ESPECIAL));    }
+        assertThat(getErros(endereco), hasItem(CEP_MENSAGEM_CARACTERES_INVALIDOS));    }
 
     @Test
     @DisplayName("😢 Teste de Número com mais de 4 caracteres")
@@ -155,12 +152,10 @@ public class EnderecoTest {
     @Test
     @DisplayName("😢 Teste de Número nulo")
     void nao_deve_aceitar_um_numero_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            endereco.setNumero(null);
-        });
-        assertEquals("numero is marked non-null but is null", thrown.getMessage());
-    }
-
+        endereco.setNumero(null);
+        assertThat(getErros(endereco), hasItem(NUMERO_MENSAGEM_NULO));
+    }   
+    
     @Test
     @DisplayName("😢 Teste de Número vazio")
     void nao_deve_aceitar_um_numero_vazio() {
@@ -177,7 +172,7 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de Número com caractere especial")
     void nao_deve_aceitar_um_numero_com_caractere_especial() {
         endereco.setNumero("12&4");
-        assertThat(getErros(endereco), hasItem(NUMERO_MENSAGEM_CARACTERE_ESPECIAL));    }
+        assertThat(getErros(endereco), hasItem(NUMERO_MENSAGEM_CARACTERES_INVALIDOS));    }
 
     @Test
     @DisplayName("😢 Teste de Logradouro com menos de 3 caracteres")
@@ -218,7 +213,7 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de Logradouro com caractere especial")
     void nao_deve_aceitar_um_logradouro_com_caractere_especial() {
         endereco.setLogradouro("Ru@ das Flores");
-        assertThat(getErros(endereco), hasItem(LOGRADOURO_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(endereco), hasItem(LOGRADOURO_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -259,7 +254,7 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de Bairro com caracteres especiais")
     void nao_deve_aceitar_um_bairro_com_caracteres_especiais() {
         endereco.setBairro("J@rdim Eldorado");
-        assertThat(getErros(endereco), hasItem(BAIRRO_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(endereco), hasItem(BAIRRO_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -301,14 +296,14 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de Cidade com números")
     void nao_deve_aceitar_uma_cidade_com_numeros() {
         endereco.setCidade("S4nta Isabel");
-        assertThat(getErros(endereco), hasItem(CIDADE_MENSAGEM_NUMEROS));
+        assertThat(getErros(endereco), hasItem(CIDADE_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de Cidade com caracteres especiais")
     void nao_deve_aceitar_uma_cidade_com_caracteres_especiais() {
         endereco.setCidade("S@nta Isabel");
-        assertThat(getErros(endereco), hasItem(CIDADE_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(endereco), hasItem(CIDADE_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -350,14 +345,14 @@ public class EnderecoTest {
     @DisplayName("😢 Teste de UF com números")
     void nao_deve_aceitar_uma_uf_com_numeros() {
         endereco.setUf("5P");
-        assertThat(getErros(endereco), hasItem(UF_MENSAGEM_NUMEROS));
+        assertThat(getErros(endereco), hasItem(UF_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de UF com caracteres especiais")
     void nao_deve_aceitar_uma_uf_com_caractere_especial() {
         endereco.setUf("$P");
-        assertThat(getErros(endereco), hasItem(UF_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(endereco), hasItem(UF_MENSAGEM_CARACTERES_INVALIDOS));
     }
     
     @Test
@@ -405,9 +400,6 @@ public class EnderecoTest {
         Endereco endereco1 = new Endereco("07500000", "1204");
         Endereco endereco2 = new Endereco(cep, numero);
         assertNotEquals(endereco1, endereco2);
-        
-        System.out.println(cep);
-        System.out.println(numero);
     }
 
     @Test

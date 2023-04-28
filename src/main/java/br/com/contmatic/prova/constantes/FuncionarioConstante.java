@@ -29,21 +29,17 @@ public final class FuncionarioConstante {
 	public static final String MATRICULA_MENSAGEM_VAZIO = "O campo Matrícula do Funcionário não pode estar vazio.";
 	
 	public static final String MATRICULA_MENSAGEM_ESPACO = "O campo Matrícula do Funcionário precisa ser válido.";
-	
-	public static final String MATRICULA_MENSAGEM_CARACTERE_ESPECIAL = "O campo Matrícula do Funcionário deve conter somente números.";
-	
-	public static final String MATRICULA_MENSAGEM_LETRAS = "O campo Matrícula do Funcionário deve conter somente números.";
+		
+	public static final String MATRICULA_MENSAGEM_CARACTERES_INVALIDOS = "O campo Matrícula do Funcionário deve conter somente números.";
 	
 	public static final String CPF_MENSAGEM_NULO = "O campo CPF do Funcionário é obrigatório.";
 	
 	public static final String CPF_MENSAGEM_VAZIO = "O campo CPF do Funcionário não pode estar vazio.";
 	
-	public static final String CPF_MENSAGEM_LETRAS = "O campo CPF do Funcionário deve conter somente números.";
+	public static final String CPF_MENSAGEM_CARACTERES_INVALIDOS = "O campo CPF do Funcionário deve conter somente números.";
 	
 	public static final String CPF_MENSAGEM_TAMANHO = "O campo CPF dp Funcionário deve conter 11 dígitos.";
-	
-	public static final String CPF_MENSAGEM_CARACTERE_ESPECIAL = "O campo CPF do Funcionário deve conter somente números.";
-	
+		
 	public static final String CPF_MENSAGEM_ESPACO = "O campo CPF do Funcionário precisa ser válido.";
 	
 	public static final String CPF_MENSAGEM_INVALIDO = "O campo CPF do Funcionário precisa está inválido.";
@@ -56,10 +52,8 @@ public final class FuncionarioConstante {
 	
 	public static final String NOME_MENSAGEM_TAMANHO = "O campo Nome do Funcionário deve possuir no mínimo 5 e no máximo 40 caracteres.";
 	
-	public static final String NOME_MENSAGEM_NUMEROS = "O campo Nome do Funcionário deve conter somente letras.";
-	
-	public static final String NOME_MENSAGEM_CARACTERE_ESPECIAL = "O campo Nome do Funcionário deve conter somente letras.";
-	
+	public static final String NOME_MENSAGEM_CARACTERES_INVALIDOS = "O campo Nome do Funcionário deve conter somente letras.";
+		
 	public static final String CARGO_MENSAGEM_NULO = "O campo Cargo do Funcionário é obrigatório.";
 	
 	public static final String CARGO_MENSAGEM_VAZIO = "O campo Cargo do Funcionário não pode estar vazio.";
@@ -68,10 +62,8 @@ public final class FuncionarioConstante {
 	
 	public static final String CARGO_MENSAGEM_TAMANHO = "O campo Cargo do Funcionário deve possuir no mínimo 5 e no máximo 25 caracteres.";
 		
-	public static final String CARGO_MENSAGEM_NUMEROS = "O campo Cargo do Funcionário deve conter somente letras.";
-	
-	public static final String CARGO_MENSAGEM_CARACTERE_ESPECIAL = "O campo Cargo do Funcionário deve conter somente letras.";
-	
+	public static final String CARGO_MENSAGEM_CARACTERES_INVALIDOS = "O campo Cargo do Funcionário deve conter somente letras.";
+		
 	public static final String SETOR_MENSAGEM_NULO = "O campo Setor do Funcionário é obrigatório.";
 	
 	public static final String SETOR_MENSAGEM_VAZIO = "O campo Setor do Funcionário não pode estar vazio.";
@@ -80,10 +72,8 @@ public final class FuncionarioConstante {
 	
 	public static final String SETOR_MENSAGEM_TAMANHO = "O campo Setor do Funcionário deve possuir no mínimo 2 e no máximo 20 caracteres.";
 		
-	public static final String SETOR_MENSAGEM_NUMEROS = "O campo Setor do Funcionário deve conter somente letras.";
-	
-	public static final String SETOR_MENSAGEM_CARACTERE_ESPECIAL = "O campo Setor do Funcionário deve conter somente letras.";
-	
+	public static final String SETOR_MENSAGEM_CARACTERES_INVALIDOS = "O campo Setor do Funcionário deve conter somente letras.";
+		
 	public static final String DATA_NASCIMENTO_MENSAGEM_NULO = "O campo Data de Nascimento do Funcionário é obrigatório.";
 	
 	public static final String DATA_NASCIMENTO_MENSAGEM = "Para ser um Funcionário é preciso ter entre 18 e 70 anos.";

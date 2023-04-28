@@ -1,20 +1,20 @@
 package br.com.contmatic.prova.telefone;
 
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_TERMINADO_EM_0;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDD_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_VALOR_INVALIDO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.DDI_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.TelefoneConstante.NUMERO_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.util.Violations.getErros;
@@ -23,7 +23,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
@@ -111,10 +110,8 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de DDI nulo")
     void nao_deve_aceitar_um_ddi_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            telefone.setDdi(null);
-        });
-        assertEquals("ddi is marked non-null but is null", thrown.getMessage());
+        telefone.setDdi(null);
+        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_NULO));
     }
 
     @Test
@@ -135,14 +132,14 @@ public class TelefoneTest {
     @DisplayName("😢 Teste de DDI com letras")
     void nao_deve_aceitar_um_ddi_com_letras() {
         telefone.setDdi("SS");
-        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_LETRAS));
+        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de DDI com caracteres especiais")
     void nao_deve_aceitar_um_ddi_com_caracteres_especiais() {
         telefone.setDdi("5@");
-        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(telefone), hasItem(DDI_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -176,10 +173,8 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de DDD nulo")
     void nao_deve_aceitar_um_ddd_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            telefone.setDdd(null);
-        });
-        assertEquals("ddd is marked non-null but is null", thrown.getMessage());
+        telefone.setDdd(null);
+        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_NULO));
     }
 
     @Test
@@ -200,14 +195,14 @@ public class TelefoneTest {
     @DisplayName("😢 Teste de DDD com letras")
     void nao_deve_aceitar_um_ddd_com_letras() {
         telefone.setDdd("1A");
-        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_LETRAS));
+        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de DDD com caracteres especiais")
     void nao_deve_aceitar_um_ddd_com_caracteres_especiais() {
         telefone.setDdd("1!");
-        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(telefone), hasItem(DDD_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -234,10 +229,8 @@ public class TelefoneTest {
     @Test
     @DisplayName("😢 Teste de Número de Telefone nulo")
     void nao_deve_aceitar_um_telefone_nulo() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            telefone.setNumero(null);
-        });
-        assertEquals("numero is marked non-null but is null", thrown.getMessage());
+        telefone.setNumero(null);
+        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_NULO));
     }
 
     @Test
@@ -258,14 +251,14 @@ public class TelefoneTest {
     @DisplayName("😢 Teste de Número de Telefone com letras")
     void nao_deve_aceitar_um_telefone_com_letras() {
         telefone.setNumero("930468A42");
-        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_LETRAS));
+        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
     @DisplayName("😢 Teste de Número de Telefone com com caracteres especiais")
     void nao_deve_aceitar_um_telefone_com_caracteres_especiais() {
         telefone.setNumero("930468@42");
-        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_CARACTERE_ESPECIAL));
+        assertThat(getErros(telefone), hasItem(NUMERO_MENSAGEM_CARACTERES_INVALIDOS));
     }
 
     @Test
@@ -275,6 +268,12 @@ public class TelefoneTest {
         .withOnlyTheseFields("ddi", "ddd", "numero")
         .verify();
     }
+    
+//    @Test
+//    @DisplayName("😀 Teste de Equals")
+//    void deve_verificar_a_implementacao_do_equals_com_sucesso2() {
+//        EqualsVerifier.forClass(Telefone.class).verify();
+//    }
     
     @Test
     @DisplayName("😀 Teste de Objetos iguais")
@@ -343,6 +342,15 @@ public class TelefoneTest {
         assertTrue(telefone1.toString().contains("11"));
         assertTrue(telefone1.toString().contains("930468142"));
     }
+    
+    @Test
+    @DisplayName("😢 Teste de Hashcodes sem todos os campos")
+    void deve_retornar_false_quando_dois_hashcode_tiverem_campos_diferentes() {
+        Telefone telefone1 = new Telefone("55", null, null);
+        Telefone telefone2 = new Telefone("55", "12", "810468142");
+        assertNotEquals(telefone1, telefone2);
+    }
+    
 
     @Test
     @DisplayName("😀 Teste de Objeto Igual ao Enum")

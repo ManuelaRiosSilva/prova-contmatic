@@ -1,39 +1,35 @@
 package br.com.contmatic.prova.empresa;
 
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.ATIVO_FUNCIONARIO_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CARGO_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_INVALIDO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_LETRAS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.CPF_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.DATA_NASCIMENTO_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_ESPACO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_LETRAS;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.MATRICULA_MENSAGEM_VAZIO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.NOME_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MAXIMO_MENSAGEM;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MENSAGEM_NULO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SALARIO_MINIMO_MENSAGEM;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_CARACTERE_ESPECIAL;
+import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_CARACTERES_INVALIDOS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_ESPACO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_NULO;
-import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_NUMEROS;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_TAMANHO;
 import static br.com.contmatic.prova.constantes.FuncionarioConstante.SETOR_MENSAGEM_VAZIO;
 import static br.com.contmatic.prova.util.Violations.getErros;
@@ -42,7 +38,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
@@ -112,10 +107,8 @@ public class FuncionarioTest {
 	@Test
 	@DisplayName("😢 Teste de Matrícula nula")
 	void nao_deve_aceitar_uma_matricula_nula() {
-        NullPointerException thrown = assertThrows(NullPointerException.class, () -> {
-            funcionario.setMatricula(null);
-        });
-        assertEquals("matricula is marked non-null but is null", thrown.getMessage());
+	    funcionario.setMatricula(null);
+	    assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_NULO));  
 	}
 	
 	@Test
@@ -136,14 +129,14 @@ public class FuncionarioTest {
 	@DisplayName("😢 Teste de Matrícula com letras")
 	void nao_deve_aceitar_uma_matricula_com_letras() { 
 		funcionario.setMatricula("1234A");
-	      assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_LETRAS));   
+	      assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_CARACTERES_INVALIDOS));   
 	}
 	
 	@Test
 	@DisplayName("😢 Teste de Matrícula com caracteres especiais")
 	void nao_deve_aceitar_uma_matricula_com_caracteres_especiais() { 
 		funcionario.setMatricula("1234@");
-	      assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_CARACTERE_ESPECIAL));   
+	      assertThat(getErros(funcionario), hasItem(MATRICULA_MENSAGEM_CARACTERES_INVALIDOS));   
 	}
 	
 	@Test
@@ -192,14 +185,14 @@ public class FuncionarioTest {
 	@DisplayName("😢 Teste de CPF com letras")
 	void nao_deve_aceitar_um_cpf_com_letras() {
 		funcionario.setCpf("4952319784A");
-		assertThat(getErros(funcionario), hasItem(CPF_MENSAGEM_LETRAS));
+		assertThat(getErros(funcionario), hasItem(CPF_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
 	@DisplayName("😢 Teste de CPF com caracteres especiais")
 	void nao_deve_aceitar_um_cpf_com_caracteres_especiais() {
 		funcionario.setCpf("4952319784!");
-		assertThat(getErros(funcionario), hasItem(CPF_MENSAGEM_CARACTERE_ESPECIAL));
+		assertThat(getErros(funcionario), hasItem(CPF_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
@@ -248,14 +241,14 @@ public class FuncionarioTest {
 	@DisplayName("😢 Teste de Nome com números")
 	void nao_deve_aceitar_um_nome_com_numeros() {
 		funcionario.setNome("M4nuela");
-		assertThat(getErros(funcionario), hasItem(NOME_MENSAGEM_NUMEROS));
+		assertThat(getErros(funcionario), hasItem(NOME_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test 
 	@DisplayName("😢 Teste de Nome com caracteres especiais")
 	void nao_deve_aceitar_um_nome_com_caracteres_especiais() { 
 		funcionario.setNome("M@nuela Alves Rios da Silva");
-		assertThat(getErros(funcionario), hasItem(NOME_MENSAGEM_CARACTERE_ESPECIAL));
+		assertThat(getErros(funcionario), hasItem(NOME_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
@@ -297,14 +290,14 @@ public class FuncionarioTest {
 	@DisplayName("😢 Teste de Cargo com números")
 	void nao_deve_aceitar_um_cargo_com_numeros() {
 		funcionario.setCargo("Chef3");
-		assertThat(getErros(funcionario), hasItem(CARGO_MENSAGEM_NUMEROS));
+		assertThat(getErros(funcionario), hasItem(CARGO_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
 	@DisplayName("😢 Teste de Cargo com caracters especiais")
 	void nao_deve_aceitar_um_cargo_com_caracteres_especiais() { 
 		funcionario.setCargo("Chef&");
-		assertThat(getErros(funcionario), hasItem(CARGO_MENSAGEM_CARACTERE_ESPECIAL));
+		assertThat(getErros(funcionario), hasItem(CARGO_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
@@ -346,14 +339,14 @@ public class FuncionarioTest {
 	@DisplayName("😢 Teste de Setor com números")
 	void nao_deve_aceitar_um_setor_com_numeros() {
 		funcionario.setSetor("Chef3");
-		assertThat(getErros(funcionario), hasItem(SETOR_MENSAGEM_NUMEROS));
+		assertThat(getErros(funcionario), hasItem(SETOR_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 	
 	@Test
 	@DisplayName("😢 Teste de Setor com caracteres especiais")
 	void nao_deve_aceitar_um_setor_com_caracteres_especiais() { 
 		funcionario.setSetor("Chef&");
-		assertThat(getErros(funcionario), hasItem(SETOR_MENSAGEM_CARACTERE_ESPECIAL));
+		assertThat(getErros(funcionario), hasItem(SETOR_MENSAGEM_CARACTERES_INVALIDOS));
 	}
 
 	@Test

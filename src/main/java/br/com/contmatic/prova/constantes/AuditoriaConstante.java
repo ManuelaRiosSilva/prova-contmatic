@@ -26,7 +26,7 @@ public final class AuditoriaConstante {
 	
 	public static final String CRIADO_POR_MENSAGEM_TAMANHO = "O campo Criado Por deve possuir no mínimo 3 e no máximo 40 caracteres.";
 	
-	public static final String CRIADO_POR_MENSAGEM_NUMEROS = "O campo Criado Por deve conter somente letras.";
+	public static final String CRIADO_POR_MENSAGEM_CARACTERES_INVALIDOS = "O campo Criado Por deve conter somente letras.";
 	
 	public static final String CRIADO_POR_MENSAGEM_CARACTERE_ESPECIAL = "O campo Criado Por deve conter somente letras.";
 	
@@ -38,7 +38,7 @@ public final class AuditoriaConstante {
 	
 	public static final String ATUALIZADO_POR_MENSAGEM_TAMANHO = "O campo Atualizado Por deve possuir no mínimo 3 e no máximo 40 caracteres.";
 	
-	public static final String ATUALIZADO_POR_MENSAGEM_NUMEROS = "O campo Atualizado Por deve conter somente letras.";
+	public static final String ATUALIZADO_POR_MENSAGEM_CARACTERES_INVALIDOS = "O campo Atualizado Por deve conter somente letras.";
 	
 	public static final String ATUALIZADO_POR_MENSAGEM_CARACTERE_ESPECIAL = "O campo Atualizado Por deve conter somente letras.";
 	
@@ -61,9 +61,7 @@ public final class AuditoriaConstante {
 	public static final String IP_CRIACAO_MENSAGEM_INVALIDO = "O campo IP da Criação está inválido.";
 	
 	public static final String IP_CRIACAO_MENSAGEM_TAMANHO = "O campo IP da Criação deve possuir no mínimo 7 e no máximo 14 caracteres.";
-		
-	public static final String IP_CRIACAO_MENSAGEM_LETRAS = "O campo IP da Criação deve conter somente números e pontos.";
-	
+			
 	public static final String IP_ATUALIZACAO_MENSAGEM_NULO = "O campo IP da Atualização deve ser preenchido.";
 	
 	public static final String IP_ATUALIZACAO_MENSAGEM_VAZIO = "O campo IP da Atualização não pode estar vazio.";
@@ -73,9 +71,7 @@ public final class AuditoriaConstante {
 	public static final String IP_ATUALIZACAO_MENSAGEM_INVALIDO = "O campo IP da Atualização está inválido.";
 	
 	public static final String IP_ATUALIZACAO_MENSAGEM_TAMANHO = "O campo IP da Atualização deve possuir no mínimo 7 e no máximo 14 caracteres.";
-		
-	public static final String IP_ATUALIZACAO_MENSAGEM_LETRAS = "O campo IP da Atualização deve conter somente números e pontos.";
-	
+			
 	private AuditoriaConstante() {
 		super();
 	}	
